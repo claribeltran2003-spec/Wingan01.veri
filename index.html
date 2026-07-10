@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GANAMOS .NET - Bono 30%</title>
+  <title>GANAMOS .NET - Bono 50%</title>
 
   <!-- Meta Pixel -->
   <script>
@@ -154,16 +154,19 @@
   </div>
 
   <script>
-   const contactos = [
-        {
-            numero: "5491156472728",
-            mensaje: "Hola! Vengo de parte de Mauricio, quiero mas informacion."
-        },
-        {
-            numero: "5491176405946",
-            mensaje: "Hola! Vengo de parte de Carla, quiero mas informacion."
-        },
-    ];
+    function abrirWhatsApp() {
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Contact', {
+          content_name: 'Ganamos - Bono 50%',
+          content_category: 'Lead',
+          value: 1.00,
+          currency: 'USD'
+        });
+      }
+
+      const numero = "5492236910265";
+      const mensaje = encodeURIComponent("Hola! Quiero reclamar mi bonus 50% Golden Ticket en Ganamos.");
+      window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
     }
   </script>
 </body>
