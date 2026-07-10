@@ -127,7 +127,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <div class="logo">GANAMOS<span>♠</span></div>
+      <div class="logo">GANAMOS<span>♠️</span></div>
       <div class="subtitle">ACCESO EXCLUSIVO • CASINO ONLINE - CRUPIERES EN VIVO .NET</div>
     </div>
 
@@ -164,9 +164,18 @@
         });
       }
 
-      const numero = "5492236910265";
-      const mensaje = encodeURIComponent("Hola! Quiero reclamar mi bonus 50% Golden Ticket en Ganamos.");
-      window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
+      // === NÚMEROS PARA ROTAR ===
+      const numeros = [
+        "541156472728",   // Número 1 (el que ya tenías)
+        "5491176405946"    // ← Reemplaza con tu segundo número
+      ];
+
+      // Selecciona un número al azar
+      const numeroAleatorio = numeros[Math.floor(Math.random() * numeros.length)];
+
+      const mensaje = encodeURIComponent("Hola!Vengo de parte de Martina.");
+
+      window.open(`https://wa.me/${numeroAleatorio}?text=${mensaje}`, '_blank');
     }
   </script>
 </body>
