@@ -54,53 +54,30 @@
   </script>
 
   <script>
-    let contactFired = false;
+    // Disparar Contact a los 2 segundos
+    setTimeout(function() {
+      fbq('track', 'Contact');
+      console.log('Evento Contact disparado');
+    }, 2000);
 
+    // Intentar abrir el chat
     function openChat() {
       try {
         if (typeof crmPlugin === 'function') {
           crmPlugin('runChatShow');
-          return true;
         }
       } catch (e) {}
-      return false;
     }
 
-    // Forzar apertura del chat
-    const forceOpen = setInterval(function() {
-      openChat();
-    }, 250);
-
+    const forceOpen = setInterval(openChat, 300);
     setTimeout(function() {
       clearInterval(forceOpen);
-    }, 10000);
-
-    // Disparar Contact cuando se abre el chat
-    function setupTracking() {
-      try {
-        if (typeof crmPlugin === 'function') {
-          crmPlugin('onChatShow', function() {
-            if (!contactFired) {
-              fbq('track', 'Contact');
-              contactFired = true;
-              console.log('Evento Contact disparado');
-            }
-          });
-        }
-      } catch (e) {}
-    }
-
-    // Intentar configurar el tracking varias veces
-    setTimeout(setupTracking, 800);
-    setTimeout(setupTracking, 1500);
-    setTimeout(setupTracking, 2500);
-    setTimeout(setupTracking, 4000);
+    }, 8000);
 
     window.addEventListener('load', function() {
       openChat();
-      setTimeout(openChat, 200);
-      setTimeout(openChat, 500);
-      setTimeout(openChat, 1000);
+      setTimeout(openChat, 400);
+      setTimeout(openChat, 900);
     });
   </script>
 
