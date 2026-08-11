@@ -53,8 +53,8 @@
     }(window,0,'crmPlugin',0,0,'crm_plugin'));
   </script>
 
+  <!-- Apertura forzada del chat (versión más agresiva) -->
   <script>
-    // Auto abrir chat
     function openChat() {
       try {
         if (typeof crmPlugin === 'function') {
@@ -65,30 +65,26 @@
       return false;
     }
 
-    let attempts = 0;
-    const interval = setInterval(function() {
-      attempts++;
-      if (openChat() || attempts >= 20) clearInterval(interval);
-    }, 300);
+    // Intentar constantemente hasta que abra
+    const forceOpen = setInterval(function() {
+      openChat();
+    }, 200);
 
-    // Detectar clic en botones de WhatsApp dentro del chat
-    document.addEventListener('click', function(e) {
-      let target = e.target;
+    // Parar después de 8 segundos
+    setTimeout(function() {
+      clearInterval(forceOpen);
+    }, 8000);
 
-      // Subir hasta encontrar un enlace
-      while (target && target !== document) {
-        if (target.tagName === 'A' && target.href) {
-          const href = target.href.toLowerCase();
-          if (href.includes('wa.me') || href.includes('api.whatsapp.com') || href.includes('whatsapp.com')) {
-            // Disparar evento Contact
-            fbq('track', 'Contact');
-            console.log('✅ Evento Contact disparado por clic en WhatsApp');
-            break;
-          }
-        }
-        target = target.parentElement;
-      }
-    }, true); // true = captura el clic aunque esté dentro del iframe/widget
+    // También intentar en estos momentos clave
+    window.addEventListener('load', function() {
+      openChat();
+      setTimeout(openChat, 100);
+      setTimeout(openChat, 300);
+      setTimeout(openChat, 600);
+      setTimeout(openChat, 1000);
+      setTimeout(openChat, 1500);
+      setTimeout(openChat, 2500);
+    });
   </script>
 
 </body>
