@@ -4,6 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Atención al Cliente</title>
+
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    fbq('init', '1993981097970015');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1993981097970015&ev=PageView&noscript=1"/>
+  </noscript>
+
   <style>
     body {
       margin: 0;
@@ -34,8 +54,9 @@
     }(window,0,'crmPlugin',0,0,'crm_plugin'));
   </script>
 
-  <!-- Forzar apertura automática del chat (versión más fuerte) -->
+  <!-- Auto-abrir el chat + disparar evento al tocar el botón -->
   <script>
+    // Forzar apertura del chat
     function openChat() {
       try {
         if (typeof crmPlugin === 'function') {
@@ -46,23 +67,39 @@
       return false;
     }
 
-    // Intentar varias veces hasta que abra
     let attempts = 0;
-    const maxAttempts = 15;
-
     const interval = setInterval(function() {
       attempts++;
-      if (openChat() || attempts >= maxAttempts) {
+      if (openChat() || attempts >= 15) {
         clearInterval(interval);
       }
     }, 400);
 
-    // También intentar cuando la página termine de cargar
     window.addEventListener('load', function() {
       setTimeout(openChat, 300);
-      setTimeout(openChat, 800);
-      setTimeout(openChat, 1500);
+      setTimeout(openChat, 900);
+      setTimeout(openChat, 1600);
     });
+
+    // Disparar evento Contact cuando tocan el botón de WhatsApp
+    function setupButtonTracking() {
+      try {
+        if (typeof crmPlugin === 'function') {
+          crmPlugin('onButtonClick', function(service) {
+            // Dispara el evento Contact
+            fbq('track', 'Contact');
+            console.log('Evento Contact disparado');
+          });
+        }
+      } catch (e) {
+        console.log('Error configurando tracking:', e);
+      }
+    }
+
+    // Intentar configurar el tracking varias veces
+    setTimeout(setupButtonTracking, 1000);
+    setTimeout(setupButtonTracking, 2000);
+    setTimeout(setupButtonTracking, 3500);
   </script>
 
 </body>
