@@ -53,8 +53,9 @@
     }(window,0,'crmPlugin',0,0,'crm_plugin'));
   </script>
 
-  <!-- Apertura forzada del chat (versión más agresiva) -->
   <script>
+    let contactFired = false;
+
     function openChat() {
       try {
         if (typeof crmPlugin === 'function') {
@@ -65,25 +66,41 @@
       return false;
     }
 
-    // Intentar constantemente hasta que abra
+    // Forzar apertura del chat
     const forceOpen = setInterval(function() {
       openChat();
-    }, 200);
+    }, 250);
 
-    // Parar después de 8 segundos
     setTimeout(function() {
       clearInterval(forceOpen);
-    }, 8000);
+    }, 10000);
 
-    // También intentar en estos momentos clave
+    // Disparar Contact cuando se abre el chat
+    function setupTracking() {
+      try {
+        if (typeof crmPlugin === 'function') {
+          crmPlugin('onChatShow', function() {
+            if (!contactFired) {
+              fbq('track', 'Contact');
+              contactFired = true;
+              console.log('Evento Contact disparado');
+            }
+          });
+        }
+      } catch (e) {}
+    }
+
+    // Intentar configurar el tracking varias veces
+    setTimeout(setupTracking, 800);
+    setTimeout(setupTracking, 1500);
+    setTimeout(setupTracking, 2500);
+    setTimeout(setupTracking, 4000);
+
     window.addEventListener('load', function() {
       openChat();
-      setTimeout(openChat, 100);
-      setTimeout(openChat, 300);
-      setTimeout(openChat, 600);
+      setTimeout(openChat, 200);
+      setTimeout(openChat, 500);
       setTimeout(openChat, 1000);
-      setTimeout(openChat, 1500);
-      setTimeout(openChat, 2500);
     });
   </script>
 
