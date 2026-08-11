@@ -34,19 +34,34 @@
     }(window,0,'crmPlugin',0,0,'crm_plugin'));
   </script>
 
-  <!-- Forzar que el chat se abra solo -->
+  <!-- Forzar apertura automática del chat (versión más fuerte) -->
   <script>
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        try {
+    function openChat() {
+      try {
+        if (typeof crmPlugin === 'function') {
           crmPlugin('runChatShow');
-        } catch(e) {
-          console.log('Chat aún no cargó, reintentando...');
-          setTimeout(function() {
-            try { crmPlugin('runChatShow'); } catch(e) {}
-          }, 1000);
+          return true;
         }
-      }, 800);
+      } catch (e) {}
+      return false;
+    }
+
+    // Intentar varias veces hasta que abra
+    let attempts = 0;
+    const maxAttempts = 15;
+
+    const interval = setInterval(function() {
+      attempts++;
+      if (openChat() || attempts >= maxAttempts) {
+        clearInterval(interval);
+      }
+    }, 400);
+
+    // También intentar cuando la página termine de cargar
+    window.addEventListener('load', function() {
+      setTimeout(openChat, 300);
+      setTimeout(openChat, 800);
+      setTimeout(openChat, 1500);
     });
   </script>
 
