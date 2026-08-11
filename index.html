@@ -30,13 +30,12 @@
       padding: 0;
       height: 100vh;
       background: #f0f2f5;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
   </style>
 </head>
 <body>
 
-  <!-- Código del widget de Kommo -->
+  <!-- Widget Kommo -->
   <script>
     (function(a,m,o,c,r,m){
       a[m]={
@@ -54,9 +53,8 @@
     }(window,0,'crmPlugin',0,0,'crm_plugin'));
   </script>
 
-  <!-- Auto-abrir el chat + disparar evento al tocar el botón -->
   <script>
-    // Forzar apertura del chat
+    // Auto abrir chat
     function openChat() {
       try {
         if (typeof crmPlugin === 'function') {
@@ -70,36 +68,27 @@
     let attempts = 0;
     const interval = setInterval(function() {
       attempts++;
-      if (openChat() || attempts >= 15) {
-        clearInterval(interval);
-      }
-    }, 400);
+      if (openChat() || attempts >= 20) clearInterval(interval);
+    }, 300);
 
-    window.addEventListener('load', function() {
-      setTimeout(openChat, 300);
-      setTimeout(openChat, 900);
-      setTimeout(openChat, 1600);
-    });
+    // Detectar clic en botones de WhatsApp dentro del chat
+    document.addEventListener('click', function(e) {
+      let target = e.target;
 
-    // Disparar evento Contact cuando tocan el botón de WhatsApp
-    function setupButtonTracking() {
-      try {
-        if (typeof crmPlugin === 'function') {
-          crmPlugin('onButtonClick', function(service) {
-            // Dispara el evento Contact
+      // Subir hasta encontrar un enlace
+      while (target && target !== document) {
+        if (target.tagName === 'A' && target.href) {
+          const href = target.href.toLowerCase();
+          if (href.includes('wa.me') || href.includes('api.whatsapp.com') || href.includes('whatsapp.com')) {
+            // Disparar evento Contact
             fbq('track', 'Contact');
-            console.log('Evento Contact disparado');
-          });
+            console.log('✅ Evento Contact disparado por clic en WhatsApp');
+            break;
+          }
         }
-      } catch (e) {
-        console.log('Error configurando tracking:', e);
+        target = target.parentElement;
       }
-    }
-
-    // Intentar configurar el tracking varias veces
-    setTimeout(setupButtonTracking, 1000);
-    setTimeout(setupButtonTracking, 2000);
-    setTimeout(setupButtonTracking, 3500);
+    }, true); // true = captura el clic aunque esté dentro del iframe/widget
   </script>
 
 </body>
