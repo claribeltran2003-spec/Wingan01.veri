@@ -183,38 +183,48 @@
       if (typeof fbq === 'function') fbq('track', 'Contact');
     }, 2500);
 
-    // BORRAR el botón flotante del DOM apenas aparezca
-    var observer = new MutationObserver(function() {
+    // Mover el botón de Kommo FUERA de la pantalla (no lo borramos)
+    function moverBotonKommo() {
       var btn = document.getElementById('crm_plugin_button');
-      if (btn && btn.parentNode) {
-        btn.parentNode.removeChild(btn);
+      if (btn) {
+        btn.style.position = 'fixed';
+        btn.style.bottom = '-200px';
+        btn.style.right = '-200px';
+        btn.style.left = 'auto';
+        btn.style.top = 'auto';
+        btn.style.opacity = '0';
+        btn.style.zIndex = '-1';
+        btn.style.pointerEvents = 'auto'; // importante: sigue siendo clickeable
       }
-      // También por clase por si cambia el id
-      document.querySelectorAll('[id*="crm_plugin"], .crm-button, [class*="amo-button"]').forEach(function(el) {
-        // Solo borrar si parece el botón flotante (no la ventana del chat)
-        if (el.id === 'crm_plugin_button' || (el.className && el.className.toString().indexOf('button') > -1 && el.offsetWidth < 100)) {
-          if (el.parentNode) el.parentNode.removeChild(el);
-        }
-      });
-    });
+    }
 
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // Por las dudas también cada 300ms
-    setInterval(function() {
-      var btn = document.getElementById('crm_plugin_button');
-      if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
-    }, 300);
+    setInterval(moverBotonKommo, 400);
+    setTimeout(moverBotonKommo, 800);
+    setTimeout(moverBotonKommo, 2000);
+    setTimeout(moverBotonKommo, 4000);
 
     function abrirChat() {
+      // Método oficial
       try {
         if (typeof crmPlugin === 'function') {
           crmPlugin('runChatShow');
         }
       } catch(e) {}
 
-      setTimeout(function() { try { crmPlugin('runChatShow'); } catch(e) {} }, 400);
-      setTimeout(function() { try { crmPlugin('runChatShow'); } catch(e) {} }, 1000);
+      // Clic real al botón (aunque esté fuera de pantalla)
+      var btn = document.getElementById('crm_plugin_button');
+      if (btn) {
+        try { btn.click(); } catch(e) {}
+      }
+
+      setTimeout(function() {
+        try { crmPlugin('runChatShow'); } catch(e) {}
+        if (btn) try { btn.click(); } catch(e) {}
+      }, 500);
+
+      setTimeout(function() {
+        try { crmPlugin('runChatShow'); } catch(e) {}
+      }, 1200);
     }
 
     document.getElementById('btnChat').addEventListener('click', function(e) {
