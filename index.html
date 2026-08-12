@@ -2,13 +2,19 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
 
   <title>GANAMOS - Bono de Regalo</title>
 
-  <!-- =========================================================
+
+  <!-- =====================================================
        FACEBOOK PIXEL
-  ========================================================== -->
+  ====================================================== -->
+
   <script>
     !function(f,b,e,v,n,t,s)
     {
@@ -45,6 +51,7 @@
     fbq('track', 'PageView');
   </script>
 
+
   <noscript>
     <img
       height="1"
@@ -55,9 +62,10 @@
   </noscript>
 
 
-  <!-- =========================================================
+  <!-- =====================================================
        ESTILOS
-  ========================================================== -->
+  ====================================================== -->
+
   <style>
 
     * {
@@ -91,9 +99,7 @@
     }
 
 
-    /* =========================================================
-       TEXTO SOBRE EL BOTÓN
-    ========================================================== */
+    /* TEXTO */
 
     .cta-text {
       position: absolute;
@@ -130,9 +136,7 @@
     }
 
 
-    /* =========================================================
-       BOTÓN VERDE
-    ========================================================== */
+    /* BOTÓN VERDE */
 
     .wa-btn {
       position: absolute;
@@ -204,9 +208,7 @@
     }
 
 
-    /* =========================================================
-       ANIMACIÓN
-    ========================================================== */
+    /* ANIMACIÓN */
 
     @keyframes pulse {
 
@@ -246,9 +248,10 @@
 
 <body>
 
-  <!-- =========================================================
+
+  <!-- =====================================================
        LANDING
-  ========================================================== -->
+  ====================================================== -->
 
   <div class="wrapper">
 
@@ -258,19 +261,11 @@
       class="promo"
     >
 
-    <!-- Texto -->
+
     <p class="cta-text">
       Tocá el botón para hablar por WhatsApp
     </p>
 
-
-    <!-- =======================================================
-         BOTÓN PRINCIPAL
-         
-         IMPORTANTE:
-         Este botón NO abre WhatsApp.
-         Abre el chat de Kommo.
-    ======================================================== -->
 
     <button
       class="wa-btn"
@@ -281,8 +276,6 @@
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
         alt="WhatsApp"
-        width="26"
-        height="26"
       >
 
       Escribime acá!
@@ -293,35 +286,25 @@
 
 
 
-  <!-- =========================================================
+  <!-- =====================================================
        KOMMO
-       
-       hidden: true
-       Hace que el botón flotante de Kommo NO aparezca.
-  ========================================================== -->
+
+       IMPORTANTE:
+       hidden:true = NO mostrar el botón flotante.
+  ====================================================== -->
 
   <script>
 
     window.crmPluginConfig = {
-
-      hidden: true,
-
-      onlinechat: {
-
-        locale: {
-          extends: "es"
-        }
-
-      }
-
+      hidden: true
     };
 
   </script>
 
 
-  <!-- =========================================================
-       SCRIPT OFICIAL DE KOMMO
-  ========================================================== -->
+  <!-- =====================================================
+       SCRIPT DE KOMMO
+  ====================================================== -->
 
   <script>
 
@@ -331,12 +314,11 @@
 
         id: "1078895",
 
-        hash:
-          "7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
+        hash: "7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
 
         locale: "es",
 
-        setMeta: function(p) {
+        setMeta: function(p){
 
           this.params =
             (this.params || []).concat([p]);
@@ -346,7 +328,7 @@
       };
 
 
-      a[o] = a[o] || function() {
+      a[o] = a[o] || function(){
 
         (a[o].q = a[o].q || []).push(arguments);
 
@@ -361,9 +343,7 @@
 
       s.id = m + '_script';
 
-      s.src =
-        'https://gso.kommo.com/js/button.js';
-
+      s.src = 'https://gso.kommo.com/js/button.js';
 
       d.head &&
       d.head.appendChild(s);
@@ -382,109 +362,62 @@
 
 
 
-  <!-- =========================================================
-       CONTROL DEL BOTÓN
-  ========================================================== -->
+  <!-- =====================================================
+       BOTÓN VERDE → ABRIR KOMMO
+  ====================================================== -->
 
   <script>
 
-    var chatOpening = false;
+    var kommoLoaded = false;
 
 
-    function openKommoChat() {
+    /*
+     * Avisamos cuando Kommo terminó de cargar.
+     */
 
-      /*
-       * Si Kommo todavía está cargando,
-       * esperamos hasta que crmPlugin esté disponible.
-       */
+    crmPlugin(
+      'onChatReady',
+      function(){
 
-      if (typeof crmPlugin !== 'function') {
+        kommoLoaded = true;
 
-        if (!chatOpening) {
-
-          chatOpening = true;
-
-          var attempts = 0;
-
-          var waitForKommo =
-            setInterval(function() {
-
-              attempts++;
-
-              if (typeof crmPlugin === 'function') {
-
-                clearInterval(waitForKommo);
-
-                chatOpening = false;
-
-                crmPlugin('runChatShow');
-
-              }
-
-              /*
-               * Dejamos de intentar después de
-               * aproximadamente 5 segundos.
-               */
-
-              if (attempts >= 20) {
-
-                clearInterval(waitForKommo);
-
-                chatOpening = false;
-
-              }
-
-            }, 250);
-
-        }
-
-        return;
       }
+    );
 
 
-      /*
-       * Kommo ya está cargado.
-       * Abrimos directamente el chat.
-       */
-
-      crmPlugin('runChatShow');
-
-    }
-
-
-
-    /* =========================================================
-       CLICK EN EL BOTÓN VERDE
-    ========================================================== */
+    /*
+     * Cuando tocan el botón verde.
+     */
 
     document
       .getElementById('btnChat')
-      .addEventListener('click', function(e) {
+      .addEventListener(
+        'click',
+        function(){
 
-        e.preventDefault();
-        e.stopPropagation();
+          /*
+           * Evento de Meta
+           */
+
+          if(typeof fbq === 'function'){
+
+            fbq('track', 'Contact');
+
+          }
 
 
-        /*
-         * Evento de Meta:
-         * Contact se dispara solamente cuando
-         * la persona toca el botón.
-         */
+          /*
+           * Abrir Kommo
+           */
 
-        if (typeof fbq === 'function') {
+          if(typeof crmPlugin === 'function'){
 
-          fbq('track', 'Contact');
+            crmPlugin('runChatShow');
+
+          }
 
         }
-
-
-        /*
-         * Abrir Kommo
-         */
-
-        openKommoChat();
-
-      });
+      );
 
   </script>
 
