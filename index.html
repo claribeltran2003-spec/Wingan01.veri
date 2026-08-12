@@ -150,18 +150,18 @@
       opacity: 0.9;
     }
 
-    /* Ocultar botón flotante de Kommo */
+    /* Botón de Kommo invisible pero FUNCIONAL (no usar display:none) */
     #crm_plugin_button,
     .crm-button,
     [class*="crm-button"],
     [id*="crm_plugin"],
     .amo-button {
-      display: none !important;
-      visibility: hidden !important;
+      position: fixed !important;
+      bottom: -9999px !important;
+      right: -9999px !important;
       opacity: 0 !important;
-      pointer-events: none !important;
-      width: 0 !important;
-      height: 0 !important;
+      pointer-events: auto !important;
+      z-index: -1 !important;
     }
   </style>
 </head>
@@ -216,35 +216,39 @@
     }, 2500);
 
     function abrirChat() {
-      console.log('Intentando abrir chat...');
+      // 1. Intentar con el método oficial
+      try {
+        if (typeof window.crmPlugin === 'function') {
+          window.crmPlugin('runChatShow');
+        }
+      } catch (e) {}
+
+      // 2. Buscar el botón de Kommo y hacerle clic real
+      var posibles = document.querySelectorAll('#crm_plugin_button, .crm-button, [class*="crm-button"], [id*="crm_plugin"], .amo-button, [class*="amo-button"]');
       
-      var intentos = [0, 300, 700, 1200, 2000];
-      intentos.forEach(function(delay) {
-        setTimeout(function() {
-          try {
-            if (typeof window.crmPlugin === 'function') {
-              window.crmPlugin('runChatShow');
-              console.log('crmPlugin ejecutado');
-            } else if (typeof crmPlugin === 'function') {
-              crmPlugin('runChatShow');
-            }
-          } catch (err) {
-            console.log('Error:', err);
-          }
-        }, delay);
+      posibles.forEach(function(btn) {
+        try {
+          btn.click();
+        } catch (e) {}
       });
+
+      // 3. Reintentos
+      setTimeout(function() {
+        try { if (window.crmPlugin) window.crmPlugin('runChatShow'); } catch(e) {}
+        document.querySelectorAll('#crm_plugin_button, .crm-button, [class*="crm-button"]').forEach(function(b) {
+          try { b.click(); } catch(e) {}
+        });
+      }, 600);
+
+      setTimeout(function() {
+        try { if (window.crmPlugin) window.crmPlugin('runChatShow'); } catch(e) {}
+      }, 1500);
     }
 
     document.getElementById('btnChat').addEventListener('click', function(e) {
       e.preventDefault();
       abrirChat();
     });
-
-    setInterval(function() {
-      document.querySelectorAll('#crm_plugin_button, .crm-button, [class*="crm-button"], [id*="crm_plugin"], .amo-button').forEach(function(el) {
-        el.style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;width:0!important;height:0!important;';
-      });
-    }, 400);
   </script>
 
 </body>
