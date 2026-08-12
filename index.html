@@ -45,7 +45,7 @@
     .container {
       width: 100%;
       max-width: 480px;
-      padding: 40px 24px;
+      padding: 40px 24px 120px;
       text-align: center;
     }
 
@@ -56,7 +56,7 @@
       background: linear-gradient(135deg, #a855f7, #7c3aed);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .badge {
@@ -89,7 +89,7 @@
       font-size: 16px;
       color: #a1a1aa;
       line-height: 1.5;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
 
     .bonus-box {
@@ -97,7 +97,7 @@
       border: 1px solid rgba(168, 85, 247, 0.25);
       border-radius: 20px;
       padding: 28px 24px;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
       position: relative;
       overflow: hidden;
     }
@@ -131,36 +131,22 @@
     .cta-text {
       font-size: 15px;
       color: #c084fc;
-      margin-bottom: 12px;
       font-weight: 500;
-    }
-
-    .arrow {
-      font-size: 28px;
-      color: #a855f7;
-      animation: bounce 1.8s infinite;
       margin-bottom: 8px;
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-8px); }
-      60% { transform: translateY(-4px); }
     }
 
     .hint {
       font-size: 13px;
       color: #71717a;
-      margin-top: 20px;
+      margin-top: 12px;
     }
 
-    /* Pequeño brillo de fondo */
     .glow {
       position: fixed;
       width: 300px;
       height: 300px;
       background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
-      top: 20%;
+      top: 18%;
       left: 50%;
       transform: translateX(-50%);
       pointer-events: none;
@@ -177,21 +163,24 @@
 
     <div class="badge">ATENCIÓN PREFERENCIAL</div>
 
-    <h1>Tu bono del <span>30%</span><br>está listo</h1>
+    <h1>Tu bono del <span>150%</span><br>está listo</h1>
 
     <p class="subtitle">
-      Abrí el chat y un asesor te activa el bono de bienvenida en menos de 1 minuto.
+      Un asesor te activa el bono de bienvenida<br>en menos de 1 minuto.
     </p>
 
     <div class="bonus-box">
-      <div class="bonus-amount">30%</div>
+      <div class="bonus-amount">150%</div>
       <div class="bonus-text">en tu primera carga</div>
     </div>
 
-    <div class="cta-text">Tocá el ícono de chat para continuar</div>
-    <div class="arrow">↓</div>
+    <div class="cta-text">
+      Tocá el botón verde para continuar
+    </div>
 
-    <p class="hint">Respuesta inmediata • Atención personalizada</p>
+    <p class="hint">
+      Respuesta inmediata • Atención personalizada
+    </p>
   </div>
 
   <!-- Widget Kommo -->
@@ -212,51 +201,24 @@
     }(window,0,'crmPlugin',0,0,'crm_plugin'));
   </script>
 
+  <!-- Tracking Contact (solo 1 vez) -->
   <script>
-    // Solo dispara Contact cuando el usuario abre el chat
     let contactFired = false;
 
     function fireContact() {
       if (contactFired) return;
       contactFired = true;
       fbq('track', 'Contact');
-      console.log('Evento Contact disparado por apertura de chat');
+      console.log('Evento Contact disparado');
     }
 
-    // Detecta cuando aparece el chat de Kommo (MutationObserver)
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.addedNodes.length) {
-          mutation.addedNodes.forEach(function(node) {
-            if (node.nodeType === 1) {
-              // Detecta el contenedor del chat de Kommo
-              if (
-                node.id && node.id.includes('crm') ||
-                node.className && (
-                  String(node.className).includes('kommo') ||
-                  String(node.className).includes('amo') ||
-                  String(node.className).includes('chat')
-                ) ||
-                (node.querySelector && node.querySelector('[class*="chat"], [id*="crm"]'))
-              ) {
-                fireContact();
-              }
-            }
-          });
-        }
-      });
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    // También escuchamos clicks en el botón del chat (por si el observer falla)
     document.addEventListener('click', function(e) {
-      const target = e.target.closest('[id*="crm"], [class*="kommo"], [class*="amo-button"], [class*="chat-button"]');
+      const target = e.target.closest(
+        '[id*="crm"], [class*="kommo"], [class*="amo"], [class*="chat-button"], [class*="button"]'
+      );
+      
       if (target) {
-        setTimeout(fireContact, 300);
+        setTimeout(fireContact, 400);
       }
     });
   </script>
