@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>GANAMOS - Bono de Regalo</title>
 
+  <!-- Facebook Pixel -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -17,6 +18,10 @@
     fbq('init', '1993981097970015');
     fbq('track', 'PageView');
   </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1993981097970015&ev=PageView&noscript=1"/>
+  </noscript>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,7 +30,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #4a0080;
+      background: #0a0015;
     }
 
     .wrapper {
@@ -44,63 +49,57 @@
       display: block;
     }
 
-    /* Zona clickeable transparente encima del botón de la imagen */
-    .hotspot {
+    /* Botón verde WhatsApp visible */
+    .wa-btn {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      bottom: 8%;
-      width: 70%;
-      max-width: 280px;
-      height: 56px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      z-index: 20;
-      border-radius: 40px;
-    }
-
-    /* Por si querés un botón real encima (opcional) */
-    .cta-real {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 7%;
-      display: none; /* poné flex si querés que se vea un botón real */
+      bottom: 6%;
+      z-index: 50;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      background: #7B2CBF;
-      color: white;
-      font-size: 16px;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px;
       font-weight: 700;
-      padding: 14px 28px;
-      border-radius: 40px;
+      padding: 15px 28px;
+      border-radius: 50px;
       border: none;
       cursor: pointer;
-      z-index: 21;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-      width: 70%;
-      max-width: 280px;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.55);
+      width: 78%;
+      max-width: 300px;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .cta-real img {
-      width: 22px;
-      height: 22px;
+    .wa-btn:active {
+      transform: translateX(-50%) scale(0.97);
+    }
+
+    .wa-btn img {
+      width: 26px;
+      height: 26px;
+      display: block;
+      flex-shrink: 0;
     }
   </style>
 </head>
 <body>
 
   <div class="wrapper">
-    <!-- La imagen de la promo (tiene que estar en la misma carpeta) -->
     <img src="promo.jpeg" alt="Bono de Regalo" class="promo">
 
-    <!-- Zona invisible clickeable sobre el botón de la imagen -->
-    <button class="hotspot" id="btnChat" type="button" aria-label="Escribime"></button>
+    <!-- Único botón visible: WhatsApp verde -->
+    <button class="wa-btn" id="btnChat" type="button">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="26" height="26">
+      Escribime acá!
+    </button>
   </div>
 
-  <!-- Kommo -->
+  <!-- Kommo (el botón flotante se mueve fuera de pantalla) -->
   <script>
     (function(a,m,o,c,r,m){
       a[m]={
@@ -119,36 +118,54 @@
   </script>
 
   <script>
+    // Pixel Contact
     setTimeout(function() {
       if (typeof fbq === 'function') fbq('track', 'Contact');
     }, 2500);
 
-    function moverBotonKommo() {
+    // Mover el botón flotante de Kommo FUERA de la pantalla (no se borra)
+    function hideKommoButton() {
       var btn = document.getElementById('crm_plugin_button');
       if (btn) {
-        btn.style.position = 'fixed';
-        btn.style.bottom = '-200px';
-        btn.style.right = '-200px';
-        btn.style.opacity = '0';
-        btn.style.zIndex = '-1';
-        btn.style.pointerEvents = 'auto';
+        btn.style.cssText = 'position:fixed!important;bottom:-300px!important;right:-300px!important;left:auto!important;top:auto!important;opacity:0!important;z-index:-1!important;pointer-events:auto!important;';
       }
     }
-    setInterval(moverBotonKommo, 400);
 
-    function abrirChat() {
-      try { if (typeof crmPlugin === 'function') crmPlugin('runChatShow'); } catch(e) {}
+    // Ejecutar varias veces porque Kommo carga tarde
+    setInterval(hideKommoButton, 400);
+    setTimeout(hideKommoButton, 600);
+    setTimeout(hideKommoButton, 1500);
+    setTimeout(hideKommoButton, 3000);
+
+    function openChat() {
+      // 1. Método oficial de Kommo
+      try {
+        if (typeof crmPlugin === 'function') {
+          crmPlugin('runChatShow');
+        }
+      } catch (e) {}
+
+      // 2. Clic real al botón oculto
       var btn = document.getElementById('crm_plugin_button');
-      if (btn) try { btn.click(); } catch(e) {}
+      if (btn) {
+        try { btn.click(); } catch (e) {}
+      }
+
+      // 3. Reintentos
       setTimeout(function() {
-        try { crmPlugin('runChatShow'); } catch(e) {}
-        if (btn) try { btn.click(); } catch(e) {}
-      }, 500);
+        try { if (typeof crmPlugin === 'function') crmPlugin('runChatShow'); } catch (e) {}
+        if (btn) try { btn.click(); } catch (e) {}
+      }, 400);
+
+      setTimeout(function() {
+        try { if (typeof crmPlugin === 'function') crmPlugin('runChatShow'); } catch (e) {}
+      }, 1000);
     }
 
     document.getElementById('btnChat').addEventListener('click', function(e) {
       e.preventDefault();
-      abrirChat();
+      e.stopPropagation();
+      openChat();
     });
   </script>
 
