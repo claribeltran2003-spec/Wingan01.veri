@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -180,18 +178,34 @@
       if (contactFired) return;
       contactFired = true;
       fbq('track', 'Contact');
-      console.log('Contact disparado');
+      console.log('✅ Contact disparado');
     }
 
-    document.addEventListener('click', function(e) {
-      if (contactFired) return;
+    // Método 1: Click
+    document.addEventListener('click', function() {
+      setTimeout(function() {
+        var chatOpen = document.querySelector('iframe') || 
+                       document.querySelector('[class*="chat"]') ||
+                       document.querySelector('[id*="crm"]');
+        
+        if (chatOpen) {
+          fireContact();
+        }
+      }, 800);
+    });
 
-      var target = e.target;
-      var parent = target.closest ? target.closest('[id*="crm"], [class*="kommo"], [class*="amo"], [class*="chat"]') : null;
-
-      if (parent || (target.id && target.id.indexOf('crm') > -1)) {
-        setTimeout(fireContact, 600);
+    // Método 2: Observer
+    var observer = new MutationObserver(function() {
+      var chatElements = document.querySelectorAll('iframe, [class*="chat"], [id*="crm"], [class*="kommo"]');
+      
+      if (chatElements.length > 2 && !contactFired) {
+        fireContact();
       }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
     });
   </script>
 
