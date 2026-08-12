@@ -55,23 +55,17 @@
 
 
   <noscript>
-
     <img
       height="1"
       width="1"
       style="display:none"
       src="https://www.facebook.com/tr?id=1993981097970015&ev=PageView&noscript=1"
     />
-
   </noscript>
-
 
 
   <!-- =====================================================
        KOMMO - CONFIGURACIÓN
-       
-       MUY IMPORTANTE:
-       Esto tiene que estar ANTES del script de Kommo.
   ====================================================== -->
 
   <script>
@@ -93,7 +87,6 @@
     };
 
   </script>
-
 
 
   <!-- =====================================================
@@ -320,6 +313,30 @@
 
     }
 
+
+    /* =====================================================
+       OCULTAR COMPLETAMENTE EL BOTÓN FLOTANTE DE KOMMO
+    ====================================================== */
+
+    #crm_plugin {
+
+      display: none !important;
+
+      visibility: hidden !important;
+
+      opacity: 0 !important;
+
+      pointer-events: none !important;
+
+    }
+
+
+    [id*="crm_plugin"] {
+
+      z-index: -9999 !important;
+
+    }
+
   </style>
 
 </head>
@@ -333,7 +350,6 @@
   ====================================================== -->
 
   <div class="wrapper">
-
 
     <img
       src="promo.jpeg"
@@ -364,13 +380,11 @@
 
     </button>
 
-
   </div>
 
 
-
   <!-- =====================================================
-       KOMMO - SCRIPT ORIGINAL
+       KOMMO
   ====================================================== -->
 
   <script>
@@ -415,7 +429,6 @@
         "https://gso.kommo.com/js/button.js";
 
 
-      d.head &&
       d.head.appendChild(s);
 
 
@@ -431,7 +444,6 @@
   </script>
 
 
-
   <!-- =====================================================
        CONTROL DEL CHAT
   ====================================================== -->
@@ -442,18 +454,52 @@
 
 
     /*
-     * Esperamos a que Kommo termine de inicializar.
+     * KOMMO LISTO
      */
 
-    crmPlugin(
-      "onChatReady",
-      function(){
+    function inicializarKommo() {
 
-        kommoReady = true;
+      if (
+        typeof crmPlugin === "function"
+      ) {
 
-        console.log("Kommo: CHAT LISTO");
+        crmPlugin(
+          "onChatReady",
+          function() {
+
+            kommoReady = true;
+
+            console.log(
+              "Kommo: chat listo"
+            );
+
+          }
+        );
 
       }
+
+    }
+
+
+    /*
+     * Esperamos a que aparezca crmPlugin
+     */
+
+    var kommoWait = setInterval(
+      function() {
+
+        if (
+          typeof crmPlugin === "function"
+        ) {
+
+          clearInterval(kommoWait);
+
+          inicializarKommo();
+
+        }
+
+      },
+      100
     );
 
 
@@ -465,21 +511,25 @@
       .getElementById("btnChat")
       .addEventListener(
         "click",
-        function(e){
+        function(e) {
 
           e.preventDefault();
 
           e.stopPropagation();
 
 
-          console.log("Botón verde presionado");
+          console.log(
+            "Botón verde presionado"
+          );
 
 
           /*
            * META PIXEL
            */
 
-          if(typeof fbq === "function"){
+          if (
+            typeof fbq === "function"
+          ) {
 
             fbq(
               "track",
@@ -490,17 +540,25 @@
 
 
           /*
-           * ABRIR CHAT DE KOMMO
+           * ABRIR CHAT
            */
 
-          if(typeof crmPlugin === "function"){
+          if (
+            typeof crmPlugin === "function"
+          ) {
 
             console.log(
-              "Abriendo chat de Kommo..."
+              "Abriendo chat Kommo..."
             );
 
             crmPlugin(
               "runChatShow"
+            );
+
+          } else {
+
+            console.log(
+              "Kommo todavía no está listo"
             );
 
           }
