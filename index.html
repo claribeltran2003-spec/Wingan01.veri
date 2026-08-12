@@ -3,512 +3,495 @@
 
 <head>
 
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
 
-<title>GANAMOS - Bono de Regalo</title>
-
-
-<!-- =====================================================
-     META PIXEL
-====================================================== -->
-
-<script>
-
-!function(f,b,e,v,n,t,s)
-{
-  if(f.fbq)return;
-
-  n=f.fbq=function(){
-    n.callMethod ?
-    n.callMethod.apply(n,arguments) :
-    n.queue.push(arguments)
-  };
-
-  if(!f._fbq)f._fbq=n;
-
-  n.push=n;
-  n.loaded=!0;
-  n.version='2.0';
-  n.queue=[];
-
-  t=b.createElement(e);
-  t.async=!0;
-  t.src=v;
-
-  s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s);
-
-}(
-  window,
-  document,
-  'script',
-  'https://connect.facebook.net/en_US/fbevents.js'
-);
+  <title>GANAMOS - Bono de Regalo</title>
 
 
-fbq(
-  'init',
-  '1993981097970015'
-);
+  <!-- =====================================================
+       META PIXEL
+  ====================================================== -->
+
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {
+      if(f.fbq)return;
+
+      n=f.fbq=function(){
+        n.callMethod ?
+        n.callMethod.apply(n,arguments) :
+        n.queue.push(arguments)
+      };
+
+      if(!f._fbq)f._fbq=n;
+
+      n.push=n;
+      n.loaded=!0;
+      n.version='2.0';
+      n.queue=[];
+
+      t=b.createElement(e);
+      t.async=!0;
+      t.src=v;
+
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s);
+
+    }(
+      window,
+      document,
+      'script',
+      'https://connect.facebook.net/en_US/fbevents.js'
+    );
+
+    fbq('init', '1993981097970015');
+
+    fbq('track', 'PageView');
+  </script>
 
 
-fbq(
-  'track',
-  'PageView'
-);
+  <noscript>
 
-</script>
+    <img
+      height="1"
+      width="1"
+      style="display:none"
+      src="https://www.facebook.com/tr?id=1993981097970015&ev=PageView&noscript=1"
+    >
 
-
-<noscript>
-
-<img
-  height="1"
-  width="1"
-  style="display:none"
-  src="https://www.facebook.com/tr?id=1993981097970015&ev=PageView&noscript=1"
-/>
-
-</noscript>
+  </noscript>
 
 
-<!-- =====================================================
-     KOMMO CONFIG
-====================================================== -->
+  <!-- =====================================================
+       KOMMO CONFIG
+  ====================================================== -->
 
-<script>
+  <script>
 
-window.crmPluginConfig = {
+    window.crmPluginConfig = {
 
-  hidden: true,
+      hidden: true,
 
-  onlinechat: {
+      onlinechat: {
 
-    mode: "widget",
+        mode: "widget",
 
-    locale: {
-      extends: "es"
+        locale: {
+          extends: "es"
+        }
+
+      }
+
+    };
+
+  </script>
+
+
+  <!-- =====================================================
+       KOMMO SCRIPT
+  ====================================================== -->
+
+  <script
+    async
+    id="crm_plugin_script"
+    src="https://gso.kommo.com/js/button.js">
+  </script>
+
+
+  <!-- =====================================================
+       CSS OFICIAL KOMMO
+       MISMA CONFIGURACIÓN DE LA LANDING DE REFERENCIA
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="https://gso.kommo.com/build/css/index.css?f4Z6G1mL4LI9f_2kboV0x"
+  >
+
+
+  <!-- =====================================================
+       ESTILOS DE LA LANDING
+  ====================================================== -->
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-  }
 
-};
+    html,
+    body {
 
-</script>
+      width: 100%;
+      height: 100%;
 
+      overflow: hidden;
 
-<!-- =====================================================
-     CSS OFICIAL KOMMO
-====================================================== -->
+      background: #0a0015;
 
-<link
-  rel="stylesheet"
-  href="https://gso.kommo.com/build/css/index.css"
->
+    }
 
 
-<!-- =====================================================
-     ESTILOS
-====================================================== -->
+    .wrapper {
 
-<style>
+      position: relative;
 
-* {
+      width: 100%;
+      height: 100%;
 
-  margin: 0;
-  padding: 0;
+      max-width: 480px;
 
-  box-sizing: border-box;
+      margin: 0 auto;
 
-}
+    }
 
 
-html,
-body {
+    .promo {
 
-  width: 100%;
-  height: 100%;
+      width: 100%;
+      height: 100%;
 
-  overflow: hidden;
+      object-fit: cover;
 
-  background: #0a0015;
+      object-position: center top;
 
-}
+      display: block;
 
+    }
 
-.wrapper {
 
-  position: relative;
+    /* =====================================================
+       TEXTO
+    ====================================================== */
 
-  width: 100%;
-  height: 100%;
+    .cta-text {
 
-  max-width: 480px;
+      position: absolute;
 
-  margin: 0 auto;
+      left: 50%;
 
-}
+      transform:
+        translateX(-50%);
 
+      bottom: 14%;
 
-.promo {
+      z-index: 50;
 
-  width: 100%;
-  height: 100%;
+      width: 90%;
 
-  object-fit: cover;
+      color: #fff;
 
-  object-position: center top;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
 
-  display: block;
+      font-size: 14px;
 
-}
+      font-weight: 600;
 
+      text-align: center;
 
-/* =====================================================
-   TEXTO
-====================================================== */
+      letter-spacing: .2px;
 
-.cta-text {
+      text-shadow:
+        0 2px 8px rgba(0,0,0,.7);
 
-  position: absolute;
+    }
 
-  left: 50%;
 
-  transform:
-    translateX(-50%);
+    /* =====================================================
+       BOTÓN VERDE
+    ====================================================== */
 
-  bottom: 14%;
+    .cta-btn {
 
-  z-index: 50;
+      position: absolute;
 
-  width: 90%;
+      left: 50%;
 
-  color: #fff;
+      transform:
+        translateX(-50%);
 
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif;
+      bottom: 5.5%;
 
-  font-size: 14px;
+      z-index: 50;
 
-  font-weight: 600;
+      display: flex;
 
-  text-align: center;
+      align-items: center;
 
-  letter-spacing: .2px;
+      justify-content: center;
 
-  text-shadow:
-    0 2px 8px rgba(0,0,0,.7);
+      gap: 10px;
 
-}
+      width: 78%;
 
+      max-width: 300px;
 
-/* =====================================================
-   BOTÓN VERDE
-====================================================== */
+      padding: 15px 28px;
 
-.wa-btn {
+      background: #25D366;
 
-  position: absolute;
+      color: #fff;
 
-  left: 50%;
+      text-decoration: none;
 
-  transform:
-    translateX(-50%);
+      border: none;
 
-  bottom: 5.5%;
+      border-radius: 50px;
 
-  z-index: 50;
+      cursor: pointer;
 
-  display: flex;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
 
-  align-items: center;
+      font-size: 17px;
 
-  justify-content: center;
+      font-weight: 700;
 
-  gap: 10px;
+      box-shadow:
+        0 8px 24px
+        rgba(37,211,102,.55);
 
-  width: 78%;
+      -webkit-tap-highlight-color:
+        transparent;
 
-  max-width: 300px;
+      animation:
+        pulse 1.6s ease-in-out infinite;
 
-  padding: 15px 28px;
+    }
 
-  background: #25D366;
 
-  color: #fff;
+    .cta-btn:active {
 
-  text-decoration: none;
+      transform:
+        translateX(-50%)
+        scale(.97);
 
-  border: none;
+    }
 
-  border-radius: 50px;
 
-  cursor: pointer;
+    .cta-btn img {
 
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif;
+      width: 26px;
 
-  font-size: 17px;
+      height: 26px;
 
-  font-weight: 700;
+      display: block;
 
-  box-shadow:
-    0 8px 24px
-    rgba(37,211,102,.55);
+      flex-shrink: 0;
 
-  -webkit-tap-highlight-color:
-    transparent;
+    }
 
-  animation:
-    pulse 1.6s
-    ease-in-out
-    infinite;
 
-}
+    /* =====================================================
+       LOADING
+    ====================================================== */
 
+    .cta-btn .btn-label {
 
-.wa-btn:active {
+      display: inline;
 
-  transform:
-    translateX(-50%)
-    scale(.97);
+    }
 
-}
 
+    .cta-btn .btn-loading {
 
-.wa-btn img {
+      display: none;
 
-  width: 26px;
+      align-items: center;
 
-  height: 26px;
+      gap: 10px;
 
-  display: block;
+    }
 
-  flex-shrink: 0;
 
-}
+    .cta-btn.is-loading .btn-label {
 
+      display: none;
 
-/* =====================================================
-   LOADING
-====================================================== */
+    }
 
-.btn-loading {
 
-  display: none;
+    .cta-btn.is-loading .btn-loading {
 
-  align-items: center;
+      display: inline-flex;
 
-  gap: 10px;
+    }
 
-}
 
+    .btn-spinner {
 
-.wa-btn.is-loading
-.btn-label {
+      width: 18px;
 
-  display: none;
+      height: 18px;
 
-}
+      border-radius: 50%;
 
+      border: 2px solid
+        rgba(255,255,255,.45);
 
-.wa-btn.is-loading
-.btn-loading {
+      border-top-color:
+        currentColor;
 
-  display: inline-flex;
+      animation:
+        btnSpin .8s linear infinite;
 
-}
+    }
 
 
-.btn-spinner {
+    @keyframes btnSpin {
 
-  width: 18px;
+      to {
+        transform: rotate(360deg);
+      }
 
-  height: 18px;
+    }
 
-  border-radius: 50%;
 
-  border: 2px solid
-    rgba(255,255,255,.45);
+    /* =====================================================
+       ANIMACIÓN BOTÓN
+    ====================================================== */
 
-  border-top-color:
-    currentColor;
+    @keyframes pulse {
 
-  animation:
-    btnSpin .8s
-    linear infinite;
+      0% {
 
-}
+        transform:
+          translateX(-50%)
+          scale(1);
 
+        box-shadow:
+          0 8px 24px
+          rgba(37,211,102,.45);
 
-@keyframes btnSpin {
+      }
 
-  to {
+      50% {
 
-    transform:
-      rotate(360deg);
+        transform:
+          translateX(-50%)
+          scale(1.06);
 
-  }
+        box-shadow:
+          0 12px 32px
+          rgba(37,211,102,.75);
 
-}
+      }
 
+      100% {
 
-/* =====================================================
-   ANIMACIÓN
-====================================================== */
+        transform:
+          translateX(-50%)
+          scale(1);
 
-@keyframes pulse {
+        box-shadow:
+          0 8px 24px
+          rgba(37,211,102,.45);
 
-  0% {
+      }
 
-    transform:
-      translateX(-50%)
-      scale(1);
+    }
 
-    box-shadow:
-      0 8px 24px
-      rgba(37,211,102,.45);
 
-  }
+    /* =====================================================
+       KOMMO CHAT FRAME
+       
+       IMPORTANTE:
+       NO hacemos fixed, width 100vw ni height 100vh.
+       Kommo controla su propio iframe.
+    ====================================================== */
 
-  50% {
+    #kommoChatFrame {
 
-    transform:
-      translateX(-50%)
-      scale(1.06);
+      position: relative;
 
-    box-shadow:
-      0 12px 32px
-      rgba(37,211,102,.75);
+    }
 
-  }
 
-  100% {
+    /* =====================================================
+       BOTÓN CERRAR
+    ====================================================== */
 
-    transform:
-      translateX(-50%)
-      scale(1);
+    #kommoClose {
 
-    box-shadow:
-      0 8px 24px
-      rgba(37,211,102,.45);
+      position: fixed;
 
-  }
+      top: 12px;
 
-}
+      right: 12px;
 
+      z-index: 100002;
 
-/* =====================================================
-   KOMMO
-====================================================== */
+      width: 42px;
 
-/*
- * IMPORTANTE:
- * Este elemento NO ocupa la pantalla.
- * Kommo maneja su propio iframe.
- */
+      height: 42px;
 
-#kommoChatFrame {
+      border: none;
 
-  position: static !important;
+      border-radius: 50%;
 
-  width: 0 !important;
+      background:
+        rgba(0,0,0,.6);
 
-  height: 0 !important;
+      color: #fff;
 
-  display: block !important;
+      font-size: 28px;
 
-  pointer-events: none !important;
+      line-height: 42px;
 
-}
+      text-align: center;
 
+      cursor: pointer;
 
-/*
- * No modificar el iframe de Kommo.
- */
+      display: none;
 
+    }
 
-/* =====================================================
-   CERRAR
-====================================================== */
 
-#kommoClose {
+    #kommoClose.is-open {
 
-  position: fixed;
+      display: block;
 
-  top: 12px;
+    }
 
-  right: 12px;
 
-  z-index: 100002;
+    /* =====================================================
+       OCULTAR BOTÓN FLOTANTE NATIVO DE KOMMO
+    ====================================================== */
 
-  width: 42px;
+    .amo-button-holder {
 
-  height: 42px;
+      display: none !important;
 
-  border: none;
+      visibility: hidden !important;
 
-  border-radius: 50%;
+      opacity: 0 !important;
 
-  background:
-    rgba(0,0,0,.6);
+      pointer-events: none !important;
 
-  color: #fff;
+    }
 
-  font-size: 28px;
-
-  line-height: 42px;
-
-  text-align: center;
-
-  cursor: pointer;
-
-  display: none;
-
-}
-
-
-#kommoClose.is-open {
-
-  display: block;
-
-}
-
-
-/* =====================================================
-   OCULTAR BOTÓN FLOTANTE
-====================================================== */
-
-.amo-button-holder {
-
-  display: none !important;
-
-  visibility: hidden !important;
-
-  opacity: 0 !important;
-
-  pointer-events: none !important;
-
-}
-
-</style>
+  </style>
 
 </head>
 
@@ -516,457 +499,332 @@ body {
 <body>
 
 
-<!-- =====================================================
-     LANDING
-====================================================== -->
+  <!-- =====================================================
+       LANDING
+  ====================================================== -->
 
-<div class="wrapper">
+  <div class="wrapper">
 
-
-  <img
-    src="promo.jpeg"
-    alt="Bono de Regalo"
-    class="promo"
-  >
-
-
-  <p class="cta-text">
-    Tocá el botón para hablar por WhatsApp
-  </p>
-
-
-  <!-- BOTÓN -->
-
-  <a
-    href="#"
-    class="wa-btn"
-    id="botonKommo"
-  >
 
     <img
-      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-      alt="WhatsApp"
+      src="promo.jpeg"
+      alt="Bono de Regalo"
+      class="promo"
     >
 
 
-    <span class="btn-label">
-      Escribime acá!
-    </span>
+    <p class="cta-text">
+      Tocá el botón para hablar por WhatsApp
+    </p>
 
 
-    <span
-      class="btn-loading"
-      aria-live="polite"
+    <!-- ===================================================
+         BOTÓN VERDE
+    ==================================================== -->
+
+    <a
+      href="#"
+      class="cta-btn anim-shake"
+      id="botonKommo"
     >
 
-      <span
-        class="btn-spinner"
-        aria-hidden="true"
-      ></span>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="WhatsApp"
+      >
 
-      <span>
-        Cargando chat…
+
+      <span class="btn-label">
+        Escribime acá!
       </span>
 
-    </span>
 
-  </a>
+      <span
+        class="btn-loading"
+        aria-live="polite"
+      >
 
-</div>
+        <span
+          class="btn-spinner"
+          aria-hidden="true"
+        ></span>
 
+        <span>
+          Cargando chat...
+        </span>
 
-<!-- =====================================================
-     CONTENEDOR DE CONTROL
-====================================================== -->
+      </span>
 
-<div
-  id="kommoChatFrame"
-  aria-hidden="true"
-></div>
+    </a>
 
+  </div>
 
-<!-- =====================================================
-     CERRAR
-====================================================== -->
 
-<button
-  id="kommoClose"
-  type="button"
-  aria-label="Cerrar chat"
->
-  ×
-</button>
+  <!-- =====================================================
+       KOMMO CHAT FRAME
+  ====================================================== -->
 
+  <div
+    id="kommoChatFrame"
+    aria-hidden="true"
+  >
 
-<!-- =====================================================
-     SCRIPT KOMMO
-====================================================== -->
+    <div
+      id="amo-livechat"
+      class="amo-livechat amo-livechat_frame amo-livechat--no-mobile amo-livechat_hidden"
+      style="background: none;"
+    >
 
-<script>
+      <iframe
+        title="Kommo Live Chat"
+        name="amo-livechat-iframe-b61sU1U2"
+        src="https://gso.kommo.com/livechat/index.html?f4Z6G1mL4LI9f_2kboV0x"
+      >
+      </iframe>
 
-(function(a,m,o,c,r,m){
+    </div>
 
-  a[m] = {
+  </div>
 
-    id: "1078895",
 
-    hash:
-      "7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
+  <!-- =====================================================
+       BOTÓN CERRAR
+  ====================================================== -->
 
-    locale: "es",
+  <button
+    id="kommoClose"
+    type="button"
+    aria-label="Cerrar chat"
+  >
 
-    setMeta: function(p){
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      width="24"
+      height="24"
+    >
 
-      this.params =
-        (this.params || [])
-        .concat([p]);
+      <path
+        d="M6 6L18 18M18 6L6 18"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
 
-    }
+    </svg>
 
-  };
+  </button>
 
 
-  a[o] = a[o] || function(){
+  <!-- =====================================================
+       CONTROL DEL CHAT
+  ====================================================== -->
 
-    (a[o].q = a[o].q || [])
-    .push(arguments);
+  <script>
 
-  };
+    (function() {
 
 
-  var d =
-    a.document;
+      const frame =
+        document.getElementById(
+          'kommoChatFrame'
+        );
 
 
-  var s =
-    d.createElement("script");
+      const closeBtn =
+        document.getElementById(
+          'kommoClose'
+        );
 
 
-  s.async = true;
+      const kommoBtn =
+        document.getElementById(
+          'botonKommo'
+        );
 
 
-  s.id =
-    m + "_script";
+      let chatReady =
+        false;
 
 
-  s.src =
-    "https://gso.kommo.com/js/button.js";
+      let pendingOpen =
+        false;
 
 
-  d.head &&
-  d.head.appendChild(s);
+      /* ===================================================
+         LOADING
+      ==================================================== */
 
-
-}(
-  window,
-  0,
-  "crmPlugin",
-  0,
-  0,
-  "crm_plugin"
-));
-
-</script>
-
-
-<!-- =====================================================
-     CONTROL
-====================================================== -->
-
-<script>
-
-(function() {
-
-
-  const frame =
-    document.getElementById(
-      'kommoChatFrame'
-    );
-
-
-  const closeBtn =
-    document.getElementById(
-      'kommoClose'
-    );
-
-
-  const kommoBtn =
-    document.getElementById(
-      'botonKommo'
-    );
-
-
-  let chatReady =
-    false;
-
-
-  let pendingOpen =
-    false;
-
-
-  /* ===================================================
-     LOADING
-  ==================================================== */
-
-  function setBtnLoading(
-    isLoading
-  ) {
-
-    if (!kommoBtn)
-      return;
-
-
-    kommoBtn.classList.toggle(
-      'is-loading',
-      !!isLoading
-    );
-
-
-    kommoBtn.style.pointerEvents =
-      isLoading
-        ? 'none'
-        : '';
-
-
-    kommoBtn.style.opacity =
-      isLoading
-        ? '0.75'
-        : '';
-
-  }
-
-
-  /* ===================================================
-     ABRIR
-  ==================================================== */
-
-  function doOpen() {
-
-    setBtnLoading(false);
-
-
-    /*
-     * NO mostramos ningún overlay.
-     *
-     * Kommo se encarga de mostrar
-     * su propio iframe.
-     */
-
-    try {
-
-      if (
-        typeof crmPlugin ===
-        'function'
+      function setBtnLoading(
+        isLoading
       ) {
 
-        crmPlugin(
-          'runChatShow'
+        if (!kommoBtn)
+          return;
+
+
+        kommoBtn.classList.toggle(
+          'is-loading',
+          !!isLoading
         );
+
+
+        kommoBtn.style.pointerEvents =
+          isLoading
+            ? 'none'
+            : '';
+
+
+        kommoBtn.style.opacity =
+          isLoading
+            ? '0.75'
+            : '';
 
       }
 
-    } catch (_) {}
+
+      /* ===================================================
+         ABRIR CHAT
+      ==================================================== */
+
+      function doOpen() {
 
 
-    /*
-     * META
-     */
-
-    if (
-      typeof fbq ===
-      'function'
-    ) {
+        setBtnLoading(false);
 
 
-      /*
-       * Clic de contacto
-       */
+        if (!frame ||
+            !closeBtn) {
 
-      fbq(
-        'track',
-        'Contact'
-      );
+          return;
 
-
-      /*
-       * Evento personalizado
-       */
-
-      fbq(
-        'trackCustom',
-        'ClickBotonKommo'
-      );
-
-
-      /*
-       * PURCHASE
-       *
-       * Cada clic será reportado
-       * como una conversión Purchase.
-       */
-
-      fbq(
-        'track',
-        'Purchase',
-        {
-          value: 1.00,
-          currency: 'USD'
         }
-      );
-
-    }
-
-  }
 
 
-  /* ===================================================
-     CLICK
-  ==================================================== */
+        /*
+         * Misma lógica que encontramos
+         * en la landing de referencia.
+         */
 
-  function openChat(ev) {
-
-    if (ev)
-      ev.preventDefault();
-
-
-    /*
-     * Si todavía no está listo
-     */
-
-    if (!chatReady) {
-
-      pendingOpen =
-        true;
-
-      setBtnLoading(
-        true
-      );
-
-      return;
-
-    }
-
-
-    doOpen();
-
-  }
-
-
-  /* ===================================================
-     CERRAR
-  ==================================================== */
-
-  function closeChat() {
-
-
-    try {
-
-      if (
-        typeof crmPlugin ===
-        'function'
-      ) {
-
-        crmPlugin(
-          'runChatHide'
+        frame.classList.add(
+          'is-open'
         );
 
-      }
 
-    } catch (_) {}
-
-
-    if (closeBtn) {
-
-      closeBtn.classList.remove(
-        'is-open'
-      );
-
-    }
-
-  }
-
-
-  /* ===================================================
-     ESPERAR A KOMMO
-  ==================================================== */
-
-  function bindKommo() {
-
-    if (
-      typeof crmPlugin !==
-      'function'
-    ) {
-
-      setTimeout(
-        bindKommo,
-        100
-      );
-
-      return;
-
-    }
-
-
-    /*
-     * LISTO
-     */
-
-    crmPlugin(
-      'onChatReady',
-      function() {
-
-        chatReady =
-          true;
-
-
-        setBtnLoading(
-          false
+        closeBtn.classList.add(
+          'is-open'
         );
+
+
+        /*
+         * Kommo abre su propio chat.
+         */
+
+        try {
+
+          if (
+            typeof crmPlugin ===
+            'function'
+          ) {
+
+            crmPlugin(
+              'runChatShow'
+            );
+
+          }
+
+        } catch (_) {}
+
+
+        /* =================================================
+           META PIXEL
+        ================================================= */
 
 
         if (
-          pendingOpen
+          typeof fbq ===
+          'function'
         ) {
 
-          pendingOpen =
-            false;
+
+          /*
+           * Evento estándar de contacto.
+           */
+
+          fbq(
+            'track',
+            'Contact'
+          );
 
 
-          doOpen();
+          /*
+           * Evento personalizado para
+           * identificar específicamente
+           * el botón de la landing.
+           */
 
-        }
-
-      }
-    );
-
-
-    /*
-     * MOSTRÓ
-     */
-
-    crmPlugin(
-      'onChatShow',
-      function() {
-
-        if (closeBtn) {
-
-          closeBtn.classList.add(
-            'is-open'
+          fbq(
+            'trackCustom',
+            'ClickBotonKommo'
           );
 
         }
 
       }
-    );
 
 
-    /*
-     * OCULTÓ
-     */
+      /* ===================================================
+         CLICK BOTÓN
+      ==================================================== */
 
-    crmPlugin(
-      'onChatHide',
-      function() {
+      function openChat(ev) {
+
+
+        if (ev) {
+
+          ev.preventDefault();
+
+        }
+
+
+        if (!chatReady) {
+
+
+          pendingOpen =
+            true;
+
+
+          setBtnLoading(
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        doOpen();
+
+      }
+
+
+      /* ===================================================
+         CERRAR
+      ==================================================== */
+
+      function closeChat() {
+
+
+        if (frame) {
+
+          frame.classList.remove(
+            'is-open'
+          );
+
+        }
+
 
         if (closeBtn) {
 
@@ -976,64 +834,218 @@ body {
 
         }
 
-      }
-    );
 
-  }
+        if (
+          typeof crmPlugin ===
+          'function'
+        ) {
 
+          try {
 
-  /* ===================================================
-     EVENTOS
-  ==================================================== */
+            crmPlugin(
+              'runChatHide'
+            );
 
-  if (kommoBtn) {
+          } catch (_) {}
 
-    kommoBtn.addEventListener(
-      'click',
-      openChat
-    );
-
-  }
-
-
-  if (closeBtn) {
-
-    closeBtn.addEventListener(
-      'click',
-      closeChat
-    );
-
-  }
-
-
-  document.addEventListener(
-    'keydown',
-    function(ev) {
-
-      if (
-        ev.key === 'Escape'
-      ) {
-
-        closeChat();
+        }
 
       }
 
-    }
-  );
+
+      /* ===================================================
+         ESPERAR A KOMMO
+      ==================================================== */
+
+      function bindKommo() {
 
 
-  /* ===================================================
-     START
-  ==================================================== */
-
-  setBtnLoading(false);
-
-  bindKommo();
+        if (
+          typeof crmPlugin !==
+          'function'
+        ) {
 
 
-})();
+          setTimeout(
+            bindKommo,
+            100
+          );
 
-</script>
+
+          return;
+
+        }
+
+
+        /* =================================================
+           KOMMO LISTO
+        ================================================= */
+
+
+        crmPlugin(
+          'onChatReady',
+          function() {
+
+
+            chatReady =
+              true;
+
+
+            setBtnLoading(
+              false
+            );
+
+
+            if (
+              pendingOpen
+            ) {
+
+
+              pendingOpen =
+                false;
+
+
+              doOpen();
+
+            }
+
+          }
+        );
+
+
+        /* =================================================
+           KOMMO MOSTRÓ EL CHAT
+        ================================================= */
+
+
+        crmPlugin(
+          'onChatShow',
+          function() {
+
+
+            if (frame) {
+
+              frame.classList.add(
+                'is-open'
+              );
+
+              frame.setAttribute(
+                'aria-hidden',
+                'false'
+              );
+
+            }
+
+
+            if (closeBtn) {
+
+              closeBtn.classList.add(
+                'is-open'
+              );
+
+            }
+
+          }
+        );
+
+
+        /* =================================================
+           KOMMO OCULTÓ EL CHAT
+        ================================================= */
+
+
+        crmPlugin(
+          'onChatHide',
+          function() {
+
+
+            if (frame) {
+
+              frame.classList.remove(
+                'is-open'
+              );
+
+              frame.setAttribute(
+                'aria-hidden',
+                'true'
+              );
+
+            }
+
+
+            if (closeBtn) {
+
+              closeBtn.classList.remove(
+                'is-open'
+              );
+
+            }
+
+          }
+        );
+
+      }
+
+
+      /* ===================================================
+         EVENTOS
+      ==================================================== */
+
+
+      if (kommoBtn) {
+
+        kommoBtn.addEventListener(
+          'click',
+          openChat
+        );
+
+      }
+
+
+      if (closeBtn) {
+
+        closeBtn.addEventListener(
+          'click',
+          closeChat
+        );
+
+      }
+
+
+      document.addEventListener(
+        'keydown',
+        function(ev) {
+
+
+          if (
+            ev.key ===
+            'Escape'
+          ) {
+
+            closeChat();
+
+          }
+
+        }
+      );
+
+
+      /* ===================================================
+         INICIO
+      ==================================================== */
+
+
+      setBtnLoading(
+        false
+      );
+
+
+      bindKommo();
+
+
+    })();
+
+  </script>
 
 
 </body>
