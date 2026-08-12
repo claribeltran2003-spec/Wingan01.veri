@@ -99,7 +99,9 @@
     }
 
 
-    /* TEXTO */
+    /* =====================================================
+       TEXTO
+    ====================================================== */
 
     .cta-text {
       position: absolute;
@@ -136,7 +138,9 @@
     }
 
 
-    /* BOTÓN VERDE */
+    /* =====================================================
+       BOTÓN VERDE
+    ====================================================== */
 
     .wa-btn {
       position: absolute;
@@ -208,7 +212,9 @@
     }
 
 
-    /* ANIMACIÓN */
+    /* =====================================================
+       ANIMACIÓN
+    ====================================================== */
 
     @keyframes pulse {
 
@@ -239,6 +245,34 @@
           0 8px 24px rgba(37, 211, 102, 0.45);
       }
 
+    }
+
+
+    /* =====================================================
+       OCULTAR BOTÓN ORIGINAL DE KOMMO
+       
+       IMPORTANTE:
+       NO usamos display:none.
+       NO usamos z-index:-1.
+       Lo dejamos funcionando pero invisible.
+    ====================================================== */
+
+    #crm_plugin_button {
+      opacity: 0 !important;
+
+      visibility: hidden !important;
+
+      position: fixed !important;
+
+      right: 20px !important;
+      bottom: 20px !important;
+
+      width: 1px !important;
+      height: 1px !important;
+
+      pointer-events: none !important;
+
+      z-index: 1 !important;
     }
 
   </style>
@@ -285,26 +319,12 @@
   </div>
 
 
-
   <!-- =====================================================
        KOMMO
-
-       IMPORTANTE:
-       hidden:true = NO mostrar el botón flotante.
-  ====================================================== -->
-
-  <script>
-
-    window.crmPluginConfig = {
-      hidden: true
-    };
-
-  </script>
-
-
-  <!-- =====================================================
-       SCRIPT DE KOMMO
-  ====================================================== -->
+       
+       SIN hidden:true.
+       Dejamos que Kommo cargue normalmente.
+    ====================================================== -->
 
   <script>
 
@@ -314,7 +334,8 @@
 
         id: "1078895",
 
-        hash: "7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
+        hash:
+          "7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
 
         locale: "es",
 
@@ -343,7 +364,8 @@
 
       s.id = m + '_script';
 
-      s.src = 'https://gso.kommo.com/js/button.js';
+      s.src =
+        'https://gso.kommo.com/js/button.js';
 
       d.head &&
       d.head.appendChild(s);
@@ -361,42 +383,131 @@
   </script>
 
 
-
   <!-- =====================================================
-       BOTÓN VERDE → ABRIR KOMMO
+       CONTROL DEL CHAT
   ====================================================== -->
 
   <script>
 
-    var kommoLoaded = false;
+    var kommoReady = false;
 
 
     /*
-     * Avisamos cuando Kommo terminó de cargar.
+     * Kommo avisa cuando el chat está completamente
+     * inicializado.
      */
 
     crmPlugin(
       'onChatReady',
       function(){
 
-        kommoLoaded = true;
+        kommoReady = true;
+
+        console.log('KOMMO: chat listo');
 
       }
     );
 
 
     /*
-     * Cuando tocan el botón verde.
+     * Función para abrir Kommo.
+     */
+
+    function abrirKommo() {
+
+      console.log('KOMMO: intentando abrir');
+
+
+      /*
+       * MÉTODO 1:
+       * API oficial de Kommo.
+       */
+
+      if(typeof crmPlugin === 'function') {
+
+        console.log('KOMMO: ejecutando runChatShow');
+
+        crmPlugin('runChatShow');
+
+      }
+
+
+      /*
+       * MÉTODO 2:
+       * Si existe el botón real de Kommo,
+       * también simulamos el click.
+       *
+       * Esto sirve como respaldo.
+       */
+
+      setTimeout(function(){
+
+        var kommoButton =
+          document.getElementById('crm_plugin_button');
+
+
+        if(kommoButton){
+
+          console.log('KOMMO: botón encontrado');
+
+          try {
+
+            kommoButton.click();
+
+          } catch(error) {
+
+            console.log(
+              'KOMMO: error al hacer click',
+              error
+            );
+
+          }
+
+        } else {
+
+          console.log(
+            'KOMMO: botón todavía no encontrado'
+          );
+
+        }
+
+      }, 100);
+
+
+      /*
+       * Segundo intento de apertura.
+       */
+
+      setTimeout(function(){
+
+        if(typeof crmPlugin === 'function'){
+
+          crmPlugin('runChatShow');
+
+        }
+
+      }, 500);
+
+    }
+
+
+    /*
+     * BOTÓN VERDE
      */
 
     document
       .getElementById('btnChat')
       .addEventListener(
         'click',
-        function(){
+        function(e){
+
+          e.preventDefault();
+
+          e.stopPropagation();
+
 
           /*
-           * Evento de Meta
+           * Meta Contact
            */
 
           if(typeof fbq === 'function'){
@@ -410,14 +521,11 @@
            * Abrir Kommo
            */
 
-          if(typeof crmPlugin === 'function'){
-
-            crmPlugin('runChatShow');
-
-          }
+          abrirKommo();
 
         }
       );
+
 
   </script>
 
