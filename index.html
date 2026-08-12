@@ -161,7 +161,6 @@
     <p class="domain">www.ganamos.net</p>
   </div>
 
-  <!-- Kommo -->
   <script>
     (function(a,m,o,c,r,m){
       a[m]={
@@ -184,19 +183,28 @@
       if (typeof fbq === 'function') fbq('track', 'Contact');
     }, 2500);
 
-    // Ocultar SOLO el botón flotante (no la ventana del chat)
-    function ocultarBotonKommo() {
+    // BORRAR el botón flotante del DOM apenas aparezca
+    var observer = new MutationObserver(function() {
       var btn = document.getElementById('crm_plugin_button');
-      if (btn) {
-        btn.style.cssText = 'opacity:0!important;pointer-events:none!important;width:1px!important;height:1px!important;position:fixed!important;left:-9999px!important;bottom:-9999px!important;';
+      if (btn && btn.parentNode) {
+        btn.parentNode.removeChild(btn);
       }
-    }
+      // También por clase por si cambia el id
+      document.querySelectorAll('[id*="crm_plugin"], .crm-button, [class*="amo-button"]').forEach(function(el) {
+        // Solo borrar si parece el botón flotante (no la ventana del chat)
+        if (el.id === 'crm_plugin_button' || (el.className && el.className.toString().indexOf('button') > -1 && el.offsetWidth < 100)) {
+          if (el.parentNode) el.parentNode.removeChild(el);
+        }
+      });
+    });
 
-    // Ejecutar varias veces porque Kommo carga tarde
-    setInterval(ocultarBotonKommo, 500);
-    setTimeout(ocultarBotonKommo, 1000);
-    setTimeout(ocultarBotonKommo, 2000);
-    setTimeout(ocultarBotonKommo, 4000);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Por las dudas también cada 300ms
+    setInterval(function() {
+      var btn = document.getElementById('crm_plugin_button');
+      if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+    }, 300);
 
     function abrirChat() {
       try {
@@ -205,19 +213,8 @@
         }
       } catch(e) {}
 
-      setTimeout(function() {
-        try { crmPlugin('runChatShow'); } catch(e) {}
-      }, 300);
-
-      setTimeout(function() {
-        try { crmPlugin('runChatShow'); } catch(e) {}
-      }, 800);
-
-      // Clic real al botón oculto
-      var btn = document.getElementById('crm_plugin_button');
-      if (btn) {
-        try { btn.click(); } catch(e) {}
-      }
+      setTimeout(function() { try { crmPlugin('runChatShow'); } catch(e) {} }, 400);
+      setTimeout(function() { try { crmPlugin('runChatShow'); } catch(e) {} }, 1000);
     }
 
     document.getElementById('btnChat').addEventListener('click', function(e) {
