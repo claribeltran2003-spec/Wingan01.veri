@@ -1,227 +1,51 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ganamos | Atención Preferencial</title>
+<script>
+  let contactFired = false;
 
-  <!-- Facebook Pixel -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    
-    fbq('init', '2093601708172098');
-    fbq('track', 'PageView');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=2093601708172098&ev=PageView&noscript=1"/>
-  </noscript>
+  function fireContact() {
+    if (contactFired) return;
+    contactFired = true;
+    fbq('track', 'Contact');
+    console.log('Evento Contact disparado');
+  }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+  // 1. Detectar por click (más amplio)
+  document.addEventListener('click', function(e) {
+    const el = e.target;
+    const isChatButton = 
+      el.closest('[id*="crm"]') ||
+      el.closest('[class*="kommo"]') ||
+      el.closest('[class*="amo"]') ||
+      el.closest('[class*="chat"]') ||
+      el.closest('div[role="button"]') ||
+      (el.tagName === 'DIV' && el.style && el.style.backgroundColor);
+
+    if (isChatButton) {
+      setTimeout(fireContact, 500);
     }
+  });
 
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: #0a0a0f;
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow-x: hidden;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 480px;
-      padding: 40px 24px 120px;
-      text-align: center;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      background: linear-gradient(135deg, #a855f7, #7c3aed);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 28px;
-    }
-
-    .badge {
-      display: inline-block;
-      background: rgba(168, 85, 247, 0.15);
-      border: 1px solid rgba(168, 85, 247, 0.4);
-      color: #c084fc;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 50px;
-      margin-bottom: 24px;
-      letter-spacing: 0.5px;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 16px;
-    }
-
-    h1 span {
-      background: linear-gradient(135deg, #c084fc, #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      font-size: 16px;
-      color: #a1a1aa;
-      line-height: 1.5;
-      margin-bottom: 36px;
-    }
-
-    .bonus-box {
-      background: linear-gradient(145deg, #1a1025, #0f0a14);
-      border: 1px solid rgba(168, 85, 247, 0.25);
-      border-radius: 20px;
-      padding: 28px 24px;
-      margin-bottom: 32px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .bonus-box::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #a855f7, transparent);
-    }
-
-    .bonus-amount {
-      font-size: 48px;
-      font-weight: 800;
-      background: linear-gradient(135deg, #e879f9, #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .bonus-text {
-      font-size: 15px;
-      color: #d4d4d8;
-      font-weight: 500;
-    }
-
-    .cta-text {
-      font-size: 15px;
-      color: #c084fc;
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    .hint {
-      font-size: 13px;
-      color: #71717a;
-      margin-top: 12px;
-    }
-
-    .glow {
-      position: fixed;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
-      top: 18%;
-      left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-      z-index: -1;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="glow"></div>
-
-  <div class="container">
-    <div class="logo">GANAMOS</div>
-
-    <div class="badge">ATENCIÓN PREFERENCIAL</div>
-
-    <h1>Tu bono del <span>30%</span><br>está listo</h1>
-
-    <p class="subtitle">
-      Un asesor te activa el bono de bienvenida<br>en menos de 1 minuto.
-    </p>
-
-    <div class="bonus-box">
-      <div class="bonus-amount">30%</div>
-      <div class="bonus-text">en tu primera carga</div>
-    </div>
-
-    <div class="cta-text">
-      Tocá el botón verde para continuar
-    </div>
-
-    <p class="hint">
-      Respuesta inmediata • Atención personalizada
-    </p>
-  </div>
-
-  <!-- Widget Kommo -->
-  <script>
-    (function(a,m,o,c,r,m){
-      a[m]={
-        id:"1078895",
-        hash:"7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
-        locale:"es",
-        setMeta:function(p){this.params=(this.params||[]).concat([p])}
-      };
-      a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};
-      var d=a.document,s=d.createElement('script');
-      s.async=true;
-      s.id=m+'_script';
-      s.src='https://gso.kommo.com/js/button.js';
-      d.head&&d.head.appendChild(s)
-    }(window,0,'crmPlugin',0,0,'crm_plugin'));
-  </script>
-
-  <!-- Tracking Contact (solo 1 vez) -->
-  <script>
-    let contactFired = false;
-
-    function fireContact() {
-      if (contactFired) return;
-      contactFired = true;
-      fbq('track', 'Contact');
-      console.log('Evento Contact disparado');
-    }
-
-    document.addEventListener('click', function(e) {
-      const target = e.target.closest(
-        '[id*="crm"], [class*="kommo"], [class*="amo"], [class*="chat-button"], [class*="button"]'
-      );
-      
-      if (target) {
-        setTimeout(fireContact, 400);
+  // 2. Backup: MutationObserver por si el click no agarra
+  const observer = new MutationObserver(function(mutations) {
+    for (const mutation of mutations) {
+      for (const node of mutation.addedNodes) {
+        if (node.nodeType === 1) {
+          const text = node.innerText || '';
+          if (
+            text.includes('WhatsApp') || 
+            text.includes('Bienvenido') || 
+            node.querySelector?.('iframe') ||
+            (node.className && String(node.className).toLowerCase().includes('chat'))
+          ) {
+            fireContact();
+            return;
+          }
+        }
       }
-    });
-  </script>
+    }
+  });
 
-</body>
-</html>
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+</script>
