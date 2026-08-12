@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -53,13 +55,45 @@
 
 
   <noscript>
+
     <img
       height="1"
       width="1"
       style="display:none"
       src="https://www.facebook.com/tr?id=1993981097970015&ev=PageView&noscript=1"
     />
+
   </noscript>
+
+
+
+  <!-- =====================================================
+       KOMMO - CONFIGURACIÓN
+       
+       MUY IMPORTANTE:
+       Esto tiene que estar ANTES del script de Kommo.
+  ====================================================== -->
+
+  <script>
+
+    window.crmPluginConfig = {
+
+      hidden: true,
+
+      onlinechat: {
+
+        mode: "widget",
+
+        locale: {
+          extends: "es"
+        }
+
+      }
+
+    };
+
+  </script>
+
 
 
   <!-- =====================================================
@@ -74,28 +108,45 @@
       box-sizing: border-box;
     }
 
+
     html,
     body {
+
       width: 100%;
       height: 100%;
+
       overflow: hidden;
+
       background: #0a0015;
+
     }
+
 
     .wrapper {
+
       position: relative;
+
       width: 100%;
       height: 100%;
+
       max-width: 480px;
+
       margin: 0 auto;
+
     }
 
+
     .promo {
+
       width: 100%;
       height: 100%;
+
       object-fit: cover;
+
       object-position: center top;
+
       display: block;
+
     }
 
 
@@ -104,37 +155,41 @@
     ====================================================== */
 
     .cta-text {
+
       position: absolute;
 
       left: 50%;
+
       transform: translateX(-50%);
 
       bottom: 14%;
 
       z-index: 50;
 
+      width: 90%;
+
       color: #fff;
 
       font-family:
         -apple-system,
         BlinkMacSystemFont,
-        'Segoe UI',
+        "Segoe UI",
         Roboto,
         Helvetica,
         Arial,
         sans-serif;
 
       font-size: 14px;
+
       font-weight: 600;
 
       text-align: center;
 
+      letter-spacing: 0.2px;
+
       text-shadow:
         0 2px 8px rgba(0,0,0,0.7);
 
-      width: 90%;
-
-      letter-spacing: 0.2px;
     }
 
 
@@ -143,9 +198,11 @@
     ====================================================== */
 
     .wa-btn {
+
       position: absolute;
 
       left: 50%;
+
       transform: translateX(-50%);
 
       bottom: 5.5%;
@@ -153,62 +210,72 @@
       z-index: 50;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       gap: 10px;
+
+      width: 78%;
+
+      max-width: 300px;
+
+      padding: 15px 28px;
 
       background: #25D366;
 
       color: #fff;
 
+      border: none;
+
+      border-radius: 50px;
+
+      cursor: pointer;
+
       font-family:
         -apple-system,
         BlinkMacSystemFont,
-        'Segoe UI',
+        "Segoe UI",
         Roboto,
         Helvetica,
         Arial,
         sans-serif;
 
       font-size: 17px;
+
       font-weight: 700;
-
-      padding: 15px 28px;
-
-      border-radius: 50px;
-
-      border: none;
-
-      cursor: pointer;
 
       box-shadow:
         0 8px 24px rgba(37, 211, 102, 0.55);
-
-      width: 78%;
-      max-width: 300px;
 
       -webkit-tap-highlight-color: transparent;
 
       animation:
         pulse 1.6s ease-in-out infinite;
+
     }
 
 
     .wa-btn:active {
+
       transform:
         translateX(-50%)
         scale(0.97);
+
     }
 
 
     .wa-btn img {
+
       width: 26px;
+
       height: 26px;
 
       display: block;
 
       flex-shrink: 0;
+
     }
 
 
@@ -219,60 +286,38 @@
     @keyframes pulse {
 
       0% {
+
         transform:
           translateX(-50%)
           scale(1);
 
         box-shadow:
           0 8px 24px rgba(37, 211, 102, 0.45);
+
       }
 
       50% {
+
         transform:
           translateX(-50%)
           scale(1.06);
 
         box-shadow:
           0 12px 32px rgba(37, 211, 102, 0.75);
+
       }
 
       100% {
+
         transform:
           translateX(-50%)
           scale(1);
 
         box-shadow:
           0 8px 24px rgba(37, 211, 102, 0.45);
+
       }
 
-    }
-
-
-    /* =====================================================
-       OCULTAR BOTÓN ORIGINAL DE KOMMO
-       
-       IMPORTANTE:
-       NO usamos display:none.
-       NO usamos z-index:-1.
-       Lo dejamos funcionando pero invisible.
-    ====================================================== */
-
-    #crm_plugin_button {
-      opacity: 0 !important;
-
-      visibility: hidden !important;
-
-      position: fixed !important;
-
-      right: 20px !important;
-      bottom: 20px !important;
-
-      width: 1px !important;
-      height: 1px !important;
-
-      pointer-events: none !important;
-
-      z-index: 1 !important;
     }
 
   </style>
@@ -288,6 +333,7 @@
   ====================================================== -->
 
   <div class="wrapper">
+
 
     <img
       src="promo.jpeg"
@@ -310,245 +356,81 @@
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
         alt="WhatsApp"
+        width="26"
+        height="26"
       >
 
       Escribime acá!
 
     </button>
 
+
   </div>
 
 
+
   <!-- =====================================================
-       KOMMO
-       
-       SIN hidden:true.
-       Dejamos que Kommo cargue normalmente.
-    ====================================================== -->
-<!-- =====================================================
-     KOMMO
-====================================================== -->
+       KOMMO - SCRIPT ORIGINAL
+  ====================================================== -->
 
-<script>
-  (function(a,m,o,c,r,m){
+  <script>
 
-    a[m] = {
-      id: "1078895",
-      hash: "7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
-      locale: "es",
+    (function(a,m,o,c,r,m){
 
-      setMeta: function(p){
-        this.params =
-          (this.params || []).concat([p]);
-      }
-    };
+      a[m] = {
 
-    a[o] = a[o] || function(){
-      (a[o].q = a[o].q || []).push(arguments);
-    };
+        id: "1078895",
 
-    var d = a.document;
-    var s = d.createElement('script');
+        hash:
+          "7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
 
-    s.async = true;
-    s.id = m + '_script';
-    s.src = 'https://gso.kommo.com/js/button.js';
+        locale: "es",
 
-    d.head && d.head.appendChild(s);
+        setMeta: function(p){
 
-  }(
-    window,
-    0,
-    'crmPlugin',
-    0,
-    0,
-    'crm_plugin'
-  ));
-</script>
-
-
-<!-- =====================================================
-     OCULTAR ÚNICAMENTE EL BOTÓN FLOTANTE DE KOMMO
-     
-     NO eliminamos Kommo.
-     NO desactivamos el chat.
-====================================================== -->
-
-<style>
-
-  #crm_plugin_button {
-    position: fixed !important;
-
-    right: -200px !important;
-    bottom: -200px !important;
-
-    opacity: 0 !important;
-
-    width: 1px !important;
-    height: 1px !important;
-
-    z-index: -1 !important;
-
-    pointer-events: auto !important;
-  }
-
-</style>
-
-
-<script>
-
-  /*
-   * Kommo se crea dinámicamente.
-   * Por eso observamos el DOM y ocultamos
-   * solamente su botón cuando aparece.
-   */
-
-  function ocultarBotonKommo() {
-
-    var boton = document.getElementById('crm_plugin_button');
-
-    if (boton) {
-
-      boton.style.setProperty(
-        'position',
-        'fixed',
-        'important'
-      );
-
-      boton.style.setProperty(
-        'right',
-        '-200px',
-        'important'
-      );
-
-      boton.style.setProperty(
-        'bottom',
-        '-200px',
-        'important'
-      );
-
-      boton.style.setProperty(
-        'opacity',
-        '0',
-        'important'
-      );
-
-      boton.style.setProperty(
-        'width',
-        '1px',
-        'important'
-      );
-
-      boton.style.setProperty(
-        'height',
-        '1px',
-        'important'
-      );
-
-      boton.style.setProperty(
-        'z-index',
-        '-1',
-        'important'
-      );
-
-    }
-  }
-
-
-  /*
-   * Intentos iniciales
-   */
-
-  ocultarBotonKommo();
-
-  setTimeout(ocultarBotonKommo, 300);
-  setTimeout(ocultarBotonKommo, 800);
-  setTimeout(ocultarBotonKommo, 1500);
-  setTimeout(ocultarBotonKommo, 3000);
-
-
-  /*
-   * Si Kommo vuelve a crear/modificar el botón,
-   * lo volvemos a ocultar.
-   */
-
-  var observerKommo = new MutationObserver(function(){
-
-    ocultarBotonKommo();
-
-  });
-
-
-  observerKommo.observe(
-    document.body,
-    {
-      childList: true,
-      subtree: true
-    }
-  );
-
-</script>
-
-
-<!-- =====================================================
-     BOTÓN VERDE → ABRIR CHAT DE KOMMO
-====================================================== -->
-
-<script>
-
-  document
-    .getElementById('btnChat')
-    .addEventListener('click', function(e){
-
-      e.preventDefault();
-      e.stopPropagation();
-
-
-      /*
-       * META PIXEL
-       */
-
-      if (typeof fbq === 'function') {
-
-        fbq('track', 'Contact');
-
-      }
-
-
-      /*
-       * ABRIR KOMMO
-       */
-
-      if (typeof crmPlugin === 'function') {
-
-        crmPlugin('runChatShow');
-
-      }
-
-
-      /*
-       * Como respaldo, intentamos también
-       * hacer click en el botón real de Kommo.
-       */
-
-      setTimeout(function(){
-
-        var boton =
-          document.getElementById('crm_plugin_button');
-
-        if (boton) {
-
-          try {
-            boton.click();
-          } catch(e) {}
+          this.params =
+            (this.params || []).concat([p]);
 
         }
 
-      }, 200);
+      };
 
-    });
 
-</script>
+      a[o] = a[o] || function(){
+
+        (a[o].q = a[o].q || []).push(arguments);
+
+      };
+
+
+      var d = a.document;
+
+      var s = d.createElement("script");
+
+      s.async = true;
+
+      s.id = m + "_script";
+
+      s.src =
+        "https://gso.kommo.com/js/button.js";
+
+
+      d.head &&
+      d.head.appendChild(s);
+
+
+    }(
+      window,
+      0,
+      "crmPlugin",
+      0,
+      0,
+      "crm_plugin"
+    ));
+
+  </script>
+
+
 
   <!-- =====================================================
        CONTROL DEL CHAT
@@ -560,102 +442,19 @@
 
 
     /*
-     * Kommo avisa cuando el chat está completamente
-     * inicializado.
+     * Esperamos a que Kommo termine de inicializar.
      */
 
     crmPlugin(
-      'onChatReady',
+      "onChatReady",
       function(){
 
         kommoReady = true;
 
-        console.log('KOMMO: chat listo');
+        console.log("Kommo: CHAT LISTO");
 
       }
     );
-
-
-    /*
-     * Función para abrir Kommo.
-     */
-
-    function abrirKommo() {
-
-      console.log('KOMMO: intentando abrir');
-
-
-      /*
-       * MÉTODO 1:
-       * API oficial de Kommo.
-       */
-
-      if(typeof crmPlugin === 'function') {
-
-        console.log('KOMMO: ejecutando runChatShow');
-
-        crmPlugin('runChatShow');
-
-      }
-
-
-      /*
-       * MÉTODO 2:
-       * Si existe el botón real de Kommo,
-       * también simulamos el click.
-       *
-       * Esto sirve como respaldo.
-       */
-
-      setTimeout(function(){
-
-        var kommoButton =
-          document.getElementById('crm_plugin_button');
-
-
-        if(kommoButton){
-
-          console.log('KOMMO: botón encontrado');
-
-          try {
-
-            kommoButton.click();
-
-          } catch(error) {
-
-            console.log(
-              'KOMMO: error al hacer click',
-              error
-            );
-
-          }
-
-        } else {
-
-          console.log(
-            'KOMMO: botón todavía no encontrado'
-          );
-
-        }
-
-      }, 100);
-
-
-      /*
-       * Segundo intento de apertura.
-       */
-
-      setTimeout(function(){
-
-        if(typeof crmPlugin === 'function'){
-
-          crmPlugin('runChatShow');
-
-        }
-
-      }, 500);
-
-    }
 
 
     /*
@@ -663,9 +462,9 @@
      */
 
     document
-      .getElementById('btnChat')
+      .getElementById("btnChat")
       .addEventListener(
-        'click',
+        "click",
         function(e){
 
           e.preventDefault();
@@ -673,29 +472,45 @@
           e.stopPropagation();
 
 
+          console.log("Botón verde presionado");
+
+
           /*
-           * Meta Contact
+           * META PIXEL
            */
 
-          if(typeof fbq === 'function'){
+          if(typeof fbq === "function"){
 
-            fbq('track', 'Contact');
+            fbq(
+              "track",
+              "Contact"
+            );
 
           }
 
 
           /*
-           * Abrir Kommo
+           * ABRIR CHAT DE KOMMO
            */
 
-          abrirKommo();
+          if(typeof crmPlugin === "function"){
+
+            console.log(
+              "Abriendo chat de Kommo..."
+            );
+
+            crmPlugin(
+              "runChatShow"
+            );
+
+          }
 
         }
       );
-
 
   </script>
 
 
 </body>
+
 </html>
