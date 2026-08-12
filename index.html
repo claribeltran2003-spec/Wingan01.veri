@@ -325,63 +325,230 @@
        SIN hidden:true.
        Dejamos que Kommo cargue normalmente.
     ====================================================== -->
+<!-- =====================================================
+     KOMMO
+====================================================== -->
 
-  <script>
+<script>
+  (function(a,m,o,c,r,m){
 
-    (function(a,m,o,c,r,m){
+    a[m] = {
+      id: "1078895",
+      hash: "7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
+      locale: "es",
 
-      a[m] = {
+      setMeta: function(p){
+        this.params =
+          (this.params || []).concat([p]);
+      }
+    };
 
-        id: "1078895",
+    a[o] = a[o] || function(){
+      (a[o].q = a[o].q || []).push(arguments);
+    };
 
-        hash:
-          "7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
+    var d = a.document;
+    var s = d.createElement('script');
 
-        locale: "es",
+    s.async = true;
+    s.id = m + '_script';
+    s.src = 'https://gso.kommo.com/js/button.js';
 
-        setMeta: function(p){
+    d.head && d.head.appendChild(s);
 
-          this.params =
-            (this.params || []).concat([p]);
+  }(
+    window,
+    0,
+    'crmPlugin',
+    0,
+    0,
+    'crm_plugin'
+  ));
+</script>
+
+
+<!-- =====================================================
+     OCULTAR ÚNICAMENTE EL BOTÓN FLOTANTE DE KOMMO
+     
+     NO eliminamos Kommo.
+     NO desactivamos el chat.
+====================================================== -->
+
+<style>
+
+  #crm_plugin_button {
+    position: fixed !important;
+
+    right: -200px !important;
+    bottom: -200px !important;
+
+    opacity: 0 !important;
+
+    width: 1px !important;
+    height: 1px !important;
+
+    z-index: -1 !important;
+
+    pointer-events: auto !important;
+  }
+
+</style>
+
+
+<script>
+
+  /*
+   * Kommo se crea dinámicamente.
+   * Por eso observamos el DOM y ocultamos
+   * solamente su botón cuando aparece.
+   */
+
+  function ocultarBotonKommo() {
+
+    var boton = document.getElementById('crm_plugin_button');
+
+    if (boton) {
+
+      boton.style.setProperty(
+        'position',
+        'fixed',
+        'important'
+      );
+
+      boton.style.setProperty(
+        'right',
+        '-200px',
+        'important'
+      );
+
+      boton.style.setProperty(
+        'bottom',
+        '-200px',
+        'important'
+      );
+
+      boton.style.setProperty(
+        'opacity',
+        '0',
+        'important'
+      );
+
+      boton.style.setProperty(
+        'width',
+        '1px',
+        'important'
+      );
+
+      boton.style.setProperty(
+        'height',
+        '1px',
+        'important'
+      );
+
+      boton.style.setProperty(
+        'z-index',
+        '-1',
+        'important'
+      );
+
+    }
+  }
+
+
+  /*
+   * Intentos iniciales
+   */
+
+  ocultarBotonKommo();
+
+  setTimeout(ocultarBotonKommo, 300);
+  setTimeout(ocultarBotonKommo, 800);
+  setTimeout(ocultarBotonKommo, 1500);
+  setTimeout(ocultarBotonKommo, 3000);
+
+
+  /*
+   * Si Kommo vuelve a crear/modificar el botón,
+   * lo volvemos a ocultar.
+   */
+
+  var observerKommo = new MutationObserver(function(){
+
+    ocultarBotonKommo();
+
+  });
+
+
+  observerKommo.observe(
+    document.body,
+    {
+      childList: true,
+      subtree: true
+    }
+  );
+
+</script>
+
+
+<!-- =====================================================
+     BOTÓN VERDE → ABRIR CHAT DE KOMMO
+====================================================== -->
+
+<script>
+
+  document
+    .getElementById('btnChat')
+    .addEventListener('click', function(e){
+
+      e.preventDefault();
+      e.stopPropagation();
+
+
+      /*
+       * META PIXEL
+       */
+
+      if (typeof fbq === 'function') {
+
+        fbq('track', 'Contact');
+
+      }
+
+
+      /*
+       * ABRIR KOMMO
+       */
+
+      if (typeof crmPlugin === 'function') {
+
+        crmPlugin('runChatShow');
+
+      }
+
+
+      /*
+       * Como respaldo, intentamos también
+       * hacer click en el botón real de Kommo.
+       */
+
+      setTimeout(function(){
+
+        var boton =
+          document.getElementById('crm_plugin_button');
+
+        if (boton) {
+
+          try {
+            boton.click();
+          } catch(e) {}
 
         }
 
-      };
+      }, 200);
 
+    });
 
-      a[o] = a[o] || function(){
-
-        (a[o].q = a[o].q || []).push(arguments);
-
-      };
-
-
-      var d = a.document;
-
-      var s = d.createElement('script');
-
-      s.async = true;
-
-      s.id = m + '_script';
-
-      s.src =
-        'https://gso.kommo.com/js/button.js';
-
-      d.head &&
-      d.head.appendChild(s);
-
-
-    }(
-      window,
-      0,
-      'crmPlugin',
-      0,
-      0,
-      'crm_plugin'
-    ));
-
-  </script>
-
+</script>
 
   <!-- =====================================================
        CONTROL DEL CHAT
