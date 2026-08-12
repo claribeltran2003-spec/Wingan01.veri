@@ -49,12 +49,29 @@
       display: block;
     }
 
-    /* Botón verde WhatsApp visible */
+    /* Texto guía */
+    .cta-text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 14%;
+      z-index: 50;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+      width: 90%;
+      letter-spacing: 0.2px;
+    }
+
+    /* Botón verde WhatsApp animado */
     .wa-btn {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      bottom: 6%;
+      bottom: 5.5%;
       z-index: 50;
       display: flex;
       align-items: center;
@@ -73,6 +90,7 @@
       width: 78%;
       max-width: 300px;
       -webkit-tap-highlight-color: transparent;
+      animation: pulse 1.6s ease-in-out infinite;
     }
 
     .wa-btn:active {
@@ -85,6 +103,22 @@
       display: block;
       flex-shrink: 0;
     }
+
+    /* Animación de atención */
+    @keyframes pulse {
+      0% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+      }
+      50% {
+        transform: translateX(-50%) scale(1.06);
+        box-shadow: 0 12px 32px rgba(37, 211, 102, 0.75);
+      }
+      100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+      }
+    }
   </style>
 </head>
 <body>
@@ -92,14 +126,17 @@
   <div class="wrapper">
     <img src="promo.jpeg" alt="Bono de Regalo" class="promo">
 
-    <!-- Único botón visible: WhatsApp verde -->
+    <!-- Texto que indica dónde tocar -->
+    <p class="cta-text">Tocá el botón para hablar por WhatsApp</p>
+
+    <!-- Botón verde animado -->
     <button class="wa-btn" id="btnChat" type="button">
       <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="26" height="26">
       Escribime acá!
     </button>
   </div>
 
-  <!-- Kommo (el botón flotante se mueve fuera de pantalla) -->
+  <!-- Kommo -->
   <script>
     (function(a,m,o,c,r,m){
       a[m]={
@@ -118,12 +155,10 @@
   </script>
 
   <script>
-    // Pixel Contact
     setTimeout(function() {
       if (typeof fbq === 'function') fbq('track', 'Contact');
     }, 2500);
 
-    // Mover el botón flotante de Kommo FUERA de la pantalla (no se borra)
     function hideKommoButton() {
       var btn = document.getElementById('crm_plugin_button');
       if (btn) {
@@ -131,27 +166,23 @@
       }
     }
 
-    // Ejecutar varias veces porque Kommo carga tarde
     setInterval(hideKommoButton, 400);
     setTimeout(hideKommoButton, 600);
     setTimeout(hideKommoButton, 1500);
     setTimeout(hideKommoButton, 3000);
 
     function openChat() {
-      // 1. Método oficial de Kommo
       try {
         if (typeof crmPlugin === 'function') {
           crmPlugin('runChatShow');
         }
       } catch (e) {}
 
-      // 2. Clic real al botón oculto
       var btn = document.getElementById('crm_plugin_button');
       if (btn) {
         try { btn.click(); } catch (e) {}
       }
 
-      // 3. Reintentos
       setTimeout(function() {
         try { if (typeof crmPlugin === 'function') crmPlugin('runChatShow'); } catch (e) {}
         if (btn) try { btn.click(); } catch (e) {}
