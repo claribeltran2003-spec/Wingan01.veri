@@ -67,7 +67,7 @@
 
 
   <!-- =====================================================
-       KOMMO CONFIG
+       KOMMO CONFIGURACIÓN
   ====================================================== -->
 
   <script>
@@ -324,17 +324,17 @@
 
     #kommoChatFrame {
 
-      position: fixed;
+      position: fixed !important;
 
-      inset: 0;
+      inset: 0 !important;
 
-      width: 100%;
+      width: 100vw !important;
 
-      height: 100%;
+      height: 100vh !important;
 
-      z-index: 99999;
+      z-index: 99999 !important;
 
-      display: none;
+      display: none !important;
 
       background: rgba(0,0,0,0.35);
 
@@ -343,26 +343,84 @@
 
     #kommoChatFrame.active {
 
-      display: block;
+      display: block !important;
 
     }
 
 
-    #kommoChatFrame iframe {
+    /* =====================================================
+       CHAT REAL DE KOMMO
+    ====================================================== */
 
-      position: absolute;
+    #kommoChatFrame .amo-livechat {
 
-      right: 0;
+      position: fixed !important;
 
-      bottom: 0;
+      inset: 0 !important;
 
-      width: 100%;
+      width: 100vw !important;
 
-      height: 100%;
+      height: 100vh !important;
 
-      border: 0;
+      display: block !important;
 
-      background: transparent;
+      visibility: visible !important;
+
+      opacity: 1 !important;
+
+      z-index: 100000 !important;
+
+      background: transparent !important;
+
+    }
+
+
+    /*
+     * Kommo utiliza esta clase para ocultarlo.
+     */
+
+    #kommoChatFrame .amo-livechat_hidden {
+
+      display: block !important;
+
+      visibility: visible !important;
+
+      opacity: 1 !important;
+
+    }
+
+
+    /* =====================================================
+       IFRAME DE KOMMO
+    ====================================================== */
+
+    #kommoChatFrame iframe[title="Kommo Live Chat"] {
+
+      display: block !important;
+
+      visibility: visible !important;
+
+      opacity: 1 !important;
+
+      position: fixed !important;
+
+      top: 0 !important;
+
+      left: 0 !important;
+
+      width: 100vw !important;
+
+      height: 100vh !important;
+
+      min-width: 100vw !important;
+
+      min-height: 100vh !important;
+
+      border: 0 !important;
+
+      background: #fff !important;
+
+      z-index: 100001 !important;
 
     }
 
@@ -373,42 +431,42 @@
 
     #kommoClose {
 
-      position: fixed;
+      position: fixed !important;
 
-      top: 15px;
+      top: 15px !important;
 
-      right: 15px;
+      right: 15px !important;
 
-      z-index: 100001;
+      z-index: 100002 !important;
 
-      width: 42px;
+      width: 42px !important;
 
-      height: 42px;
+      height: 42px !important;
 
-      border: 0;
+      border: 0 !important;
 
-      border-radius: 50%;
+      border-radius: 50% !important;
 
-      background: rgba(0,0,0,0.65);
+      background: rgba(0,0,0,0.70) !important;
 
-      color: #fff;
+      color: #fff !important;
 
-      font-size: 25px;
+      font-size: 25px !important;
 
-      line-height: 42px;
+      line-height: 42px !important;
 
-      text-align: center;
+      text-align: center !important;
 
-      cursor: pointer;
+      cursor: pointer !important;
 
-      display: none;
+      display: none !important;
 
     }
 
 
-    #kommoChatFrame.active + #kommoClose {
+    #kommoChatFrame.active ~ #kommoClose {
 
-      display: block;
+      display: block !important;
 
     }
 
@@ -419,11 +477,11 @@
 
     .amo-button-holder,
 
+    .amo-button-holder.amo-horisontal,
+
     #crm_plugin,
 
-    [id*="crm_plugin"],
-
-    [class*="amo-button-holder"] {
+    [id*="crm_plugin"] {
 
       display: none !important;
 
@@ -449,6 +507,7 @@
 
   <div class="wrapper">
 
+
     <img
       src="promo.jpeg"
       alt="Bono de Regalo"
@@ -460,6 +519,11 @@
       Tocá el botón para hablar por WhatsApp
     </p>
 
+
+    <!-- ===================================================
+         BOTÓN PRINCIPAL
+         Es un <a> como el de Activos Black
+    ==================================================== -->
 
     <a
       href="#"
@@ -478,11 +542,12 @@
 
     </a>
 
+
   </div>
 
 
   <!-- =====================================================
-       CHAT KOMMO
+       CONTENEDOR DEL CHAT
   ====================================================== -->
 
   <div
@@ -491,6 +556,10 @@
   >
   </div>
 
+
+  <!-- =====================================================
+       BOTÓN CERRAR
+  ====================================================== -->
 
   <button
     id="kommoClose"
@@ -568,221 +637,252 @@
 
   <script>
 
-    var kommoIframe = null;
+    var kommoChatFrame =
+      document.getElementById(
+        "kommoChatFrame"
+      );
 
 
-    /*
-     * Buscamos el iframe que genera Kommo.
-     */
+    var kommoClose =
+      document.getElementById(
+        "kommoClose"
+      );
 
-    function buscarIframeKommo() {
 
-      var iframe =
+    var btnChat =
+      document.getElementById(
+        "btnChat"
+      );
+
+
+    /* =====================================================
+       MOSTRAR CHAT
+    ====================================================== */
+
+    function mostrarChatKommo() {
+
+      var livechat =
         document.querySelector(
-          'iframe[title="Kommo Live Chat"]'
+          ".amo-livechat"
         );
 
 
-      if (iframe) {
-
-        kommoIframe = iframe;
+      if (!livechat) {
 
         console.log(
-          "Iframe de Kommo encontrado:",
-          iframe.src
+          "Kommo todavía no creó el chat"
         );
 
-        return true;
+        return false;
 
       }
 
-      return false;
+
+      /*
+       * IMPORTANTE:
+       * No movemos el iframe.
+       */
+
+      livechat.classList.remove(
+        "amo-livechat_hidden"
+      );
+
+
+      livechat.style.display =
+        "block";
+
+
+      livechat.style.visibility =
+        "visible";
+
+
+      livechat.style.opacity =
+        "1";
+
+
+      /*
+       * Mostrar nuestro contenedor
+       */
+
+      kommoChatFrame.classList.add(
+        "active"
+      );
+
+
+      kommoChatFrame.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      console.log(
+        "CHAT KOMMO VISIBLE"
+      );
+
+
+      return true;
 
     }
 
 
-    /*
-     * Esperar a que Kommo cree el iframe.
-     */
+    /* =====================================================
+       BOTÓN VERDE
+    ====================================================== */
 
-    var buscarKommo =
-      setInterval(
-        function() {
+    btnChat.addEventListener(
+      "click",
+      function(e) {
 
-          if (
-            buscarIframeKommo()
-          ) {
+        e.preventDefault();
 
-            clearInterval(
-              buscarKommo
+        e.stopPropagation();
+
+
+        console.log(
+          "Botón verde presionado"
+        );
+
+
+        /*
+         * META PIXEL
+         */
+
+        if (
+          typeof fbq === "function"
+        ) {
+
+          fbq(
+            "track",
+            "Contact"
+          );
+
+        }
+
+
+        /*
+         * Intentar mostrar inmediatamente
+         */
+
+        if (
+          mostrarChatKommo()
+        ) {
+
+          return;
+
+        }
+
+
+        /*
+         * Si todavía no está creado,
+         * pedimos a Kommo que lo muestre.
+         */
+
+        if (
+          typeof crmPlugin === "function"
+        ) {
+
+          try {
+
+            crmPlugin(
+              "runChatShow"
+            );
+
+          } catch(error) {
+
+            console.log(
+              "Error de Kommo:",
+              error
             );
 
           }
 
-        },
-        300
-      );
+        }
 
 
-    /*
-     * BOTÓN VERDE
-     */
+        /*
+         * Esperar a que Kommo
+         * termine de generar el chat.
+         */
 
-    document
-      .getElementById("btnChat")
-      .addEventListener(
-        "click",
-        function(e) {
-
-          e.preventDefault();
-
-          e.stopPropagation();
+        var intentos = 0;
 
 
-          /*
-           * META PIXEL
-           */
-
-          if (
-            typeof fbq === "function"
-          ) {
-
-            fbq(
-              "track",
-              "Contact"
-            );
-
-          }
-
-
-          /*
-           * Intentar encontrar iframe
-           */
-
-          if (!kommoIframe) {
-
-            buscarIframeKommo();
-
-          }
-
-
-          /*
-           * Si Kommo todavía no generó
-           * el iframe, usamos su función
-           * oficial para inicializarlo.
-           */
-
-          if (
-            !kommoIframe &&
-            typeof crmPlugin === "function"
-          ) {
-
-            try {
-
-              crmPlugin(
-                "runChatShow"
-              );
-
-            } catch(error) {
-
-              console.log(
-                "Error Kommo:",
-                error
-              );
-
-            }
-
-          }
-
-
-          /*
-           * Esperamos brevemente a que
-           * aparezca el iframe.
-           */
-
-          setTimeout(
+        var esperarKommo =
+          setInterval(
             function() {
 
-              buscarIframeKommo();
+              intentos++;
 
 
-              if (kommoIframe) {
+              if (
+                mostrarChatKommo()
+              ) {
 
-                var frame =
-                  document.getElementById(
-                    "kommoChatFrame"
-                  );
-
-
-                /*
-                 * Movemos el iframe al
-                 * contenedor propio.
-                 */
-
-                frame.appendChild(
-                  kommoIframe
+                clearInterval(
+                  esperarKommo
                 );
 
+              }
 
-                frame.classList.add(
-                  "active"
+
+              if (
+                intentos >= 30
+              ) {
+
+                clearInterval(
+                  esperarKommo
                 );
-
-
-                frame.setAttribute(
-                  "aria-hidden",
-                  "false"
-                );
-
 
                 console.log(
-                  "Chat Kommo abierto"
-                );
-
-              } else {
-
-                console.log(
-                  "No se encontró el iframe de Kommo"
+                  "Kommo no apareció después de esperar."
                 );
 
               }
 
             },
-            500
+            200
+          );
+
+      }
+    );
+
+
+    /* =====================================================
+       CERRAR CHAT
+    ====================================================== */
+
+    kommoClose.addEventListener(
+      "click",
+      function() {
+
+        kommoChatFrame.classList.remove(
+          "active"
+        );
+
+
+        kommoChatFrame.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+
+        var livechat =
+          document.querySelector(
+            ".amo-livechat"
+          );
+
+
+        if (livechat) {
+
+          livechat.classList.add(
+            "amo-livechat_hidden"
           );
 
         }
-      );
 
+      }
+    );
 
-    /*
-     * CERRAR CHAT
-     */
-
-    document
-      .getElementById("kommoClose")
-      .addEventListener(
-        "click",
-        function() {
-
-          var frame =
-            document.getElementById(
-              "kommoChatFrame"
-            );
-
-
-          frame.classList.remove(
-            "active"
-          );
-
-
-          frame.setAttribute(
-            "aria-hidden",
-            "true"
-          );
-
-        }
-      );
 
   </script>
 
