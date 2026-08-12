@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>GANAMOS - Bono de Regalo</title>
 
-  <!-- Facebook Pixel -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -15,14 +14,9 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    
     fbq('init', '1993981097970015');
     fbq('track', 'PageView');
   </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1993981097970015&ev=PageView&noscript=1"/>
-  </noscript>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -124,7 +118,6 @@
       border: none;
       cursor: pointer;
       box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
-      transition: transform 0.15s ease;
       width: 100%;
       max-width: 300px;
     }
@@ -137,31 +130,16 @@
       display: block;
     }
 
-    .note {
-      margin-top: 20px;
-      font-size: 13px;
-      opacity: 0.88;
-    }
+    .note { margin-top: 20px; font-size: 13px; opacity: 0.88; }
+    .domain { margin-top: 28px; font-size: 14px; font-weight: 600; opacity: 0.9; }
 
-    .domain {
-      margin-top: 28px;
-      font-size: 14px;
-      font-weight: 600;
-      opacity: 0.9;
-    }
-
-    /* Botón de Kommo invisible pero FUNCIONAL (no usar display:none) */
-    #crm_plugin_button,
-    .crm-button,
-    [class*="crm-button"],
-    [id*="crm_plugin"],
-    .amo-button {
-      position: fixed !important;
-      bottom: -9999px !important;
-      right: -9999px !important;
+    /* Solo ocultar el BOTÓN flotante, NO la ventana del chat */
+    #crm_plugin_button {
       opacity: 0 !important;
-      pointer-events: auto !important;
-      z-index: -1 !important;
+      pointer-events: none !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
     }
   </style>
 </head>
@@ -192,7 +170,6 @@
     <p class="domain">www.ganamos.net</p>
   </div>
 
-  <!-- Kommo -->
   <script>
     (function(a,m,o,c,r,m){
       a[m]={
@@ -216,33 +193,25 @@
     }, 2500);
 
     function abrirChat() {
-      // 1. Intentar con el método oficial
       try {
-        if (typeof window.crmPlugin === 'function') {
-          window.crmPlugin('runChatShow');
+        if (typeof crmPlugin === 'function') {
+          crmPlugin('runChatShow');
         }
-      } catch (e) {}
-
-      // 2. Buscar el botón de Kommo y hacerle clic real
-      var posibles = document.querySelectorAll('#crm_plugin_button, .crm-button, [class*="crm-button"], [id*="crm_plugin"], .amo-button, [class*="amo-button"]');
-      
-      posibles.forEach(function(btn) {
-        try {
-          btn.click();
-        } catch (e) {}
-      });
-
-      // 3. Reintentos
-      setTimeout(function() {
-        try { if (window.crmPlugin) window.crmPlugin('runChatShow'); } catch(e) {}
-        document.querySelectorAll('#crm_plugin_button, .crm-button, [class*="crm-button"]').forEach(function(b) {
-          try { b.click(); } catch(e) {}
-        });
-      }, 600);
+      } catch(e) {}
 
       setTimeout(function() {
-        try { if (window.crmPlugin) window.crmPlugin('runChatShow'); } catch(e) {}
-      }, 1500);
+        try { crmPlugin('runChatShow'); } catch(e) {}
+      }, 400);
+
+      setTimeout(function() {
+        try { crmPlugin('runChatShow'); } catch(e) {}
+      }, 1000);
+
+      // Clic en el botón real de Kommo
+      setTimeout(function() {
+        var btn = document.getElementById('crm_plugin_button');
+        if (btn) btn.click();
+      }, 200);
     }
 
     document.getElementById('btnChat').addEventListener('click', function(e) {
