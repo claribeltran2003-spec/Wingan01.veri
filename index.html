@@ -55,17 +55,19 @@
 
 
   <noscript>
+
     <img
       height="1"
       width="1"
       style="display:none"
       src="https://www.facebook.com/tr?id=1993981097970015&ev=PageView&noscript=1"
     >
+
   </noscript>
 
 
   <!-- =====================================================
-       KOMMO CONFIGURACIÓN
+       KOMMO CONFIG
   ====================================================== -->
 
   <script>
@@ -101,7 +103,7 @@
 
 
   <!-- =====================================================
-       CSS DE KOMMO
+       CSS KOMMO
   ====================================================== -->
 
   <link
@@ -111,7 +113,7 @@
 
 
   <!-- =====================================================
-       ESTILOS LANDING
+       ESTILOS
   ====================================================== -->
 
   <style>
@@ -155,18 +157,14 @@
       width: 100%;
       height: 100%;
 
+      display: block;
+
       object-fit: cover;
 
       object-position: center top;
 
-      display: block;
-
     }
 
-
-    /* =====================================================
-       TEXTO
-    ====================================================== */
 
     .cta-text {
 
@@ -190,7 +188,6 @@
         BlinkMacSystemFont,
         "Segoe UI",
         Roboto,
-        Helvetica,
         Arial,
         sans-serif;
 
@@ -199,8 +196,6 @@
       font-weight: 600;
 
       text-align: center;
-
-      letter-spacing: .2px;
 
       text-shadow:
         0 2px 8px rgba(0,0,0,.7);
@@ -212,7 +207,7 @@
        BOTÓN VERDE
     ====================================================== */
 
-    .cta-btn {
+    #botonKommo {
 
       position: absolute;
 
@@ -223,7 +218,7 @@
       transform:
         translateX(-50%);
 
-      z-index: 100;
+      z-index: 10000;
 
       display: flex;
 
@@ -245,18 +240,13 @@
 
       text-decoration: none;
 
-      border: none;
-
       border-radius: 50px;
-
-      cursor: pointer;
 
       font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         Roboto,
-        Helvetica,
         Arial,
         sans-serif;
 
@@ -268,107 +258,30 @@
         0 8px 24px
         rgba(37,211,102,.55);
 
+      cursor: pointer;
+
       -webkit-tap-highlight-color:
         transparent;
 
-      animation:
-        pulse 1.6s ease-in-out infinite;
-
     }
 
 
-    .cta-btn:active {
-
-      transform:
-        translateX(-50%)
-        scale(.97);
-
-    }
-
-
-    .cta-btn img {
+    #botonKommo img {
 
       width: 26px;
-
       height: 26px;
 
       display: block;
 
-      flex-shrink: 0;
-
     }
 
 
     /* =====================================================
-       NO MOSTRAR "CARGANDO"
-       
-       Kommo no debe bloquear nuestro botón.
+       OCULTAR BOTÓN FLOTANTE KOMMO
     ====================================================== */
 
-    .btn-loading {
-
-      display: none !important;
-
-    }
-
-
-    .btn-label {
-
-      display: inline !important;
-
-    }
-
-
-    /* =====================================================
-       ANIMACIÓN
-    ====================================================== */
-
-    @keyframes pulse {
-
-      0% {
-
-        transform:
-          translateX(-50%)
-          scale(1);
-
-        box-shadow:
-          0 8px 24px
-          rgba(37,211,102,.45);
-
-      }
-
-      50% {
-
-        transform:
-          translateX(-50%)
-          scale(1.06);
-
-        box-shadow:
-          0 12px 32px
-          rgba(37,211,102,.75);
-
-      }
-
-      100% {
-
-        transform:
-          translateX(-50%)
-          scale(1);
-
-        box-shadow:
-          0 8px 24px
-          rgba(37,211,102,.45);
-
-      }
-
-    }
-
-
-    /* =====================================================
-       OCULTAR BOTÓN FLOTANTE NATIVO DE KOMMO
-    ====================================================== */
-
-    .amo-button-holder {
+    .amo-button-holder,
+    .amo-button-holder.amo-horisontal {
 
       display: none !important;
 
@@ -382,19 +295,98 @@
 
 
     /* =====================================================
-       OCULTAR POSIBLES BOTONES FLOTANTES DE KOMMO
+       CHAT DE KOMMO
     ====================================================== */
 
-    .amo-button {
+    #kommoChatFrame {
 
-      display: none !important;
+      position: fixed !important;
+
+      inset: 0 !important;
+
+      width: 100vw !important;
+
+      height: 100vh !important;
+
+      z-index: 99999 !important;
+
+      display: none;
+
+      pointer-events: none;
 
     }
 
 
-    .amo-button-holder.amo-horisontal {
+    #kommoChatFrame.is-open {
 
-      display: none !important;
+      display: block !important;
+
+      pointer-events: auto;
+
+    }
+
+
+    #amo-livechat {
+
+      width: 100% !important;
+
+      height: 100% !important;
+
+    }
+
+
+    #amo-livechat iframe {
+
+      width: 100% !important;
+
+      height: 100% !important;
+
+      border: 0 !important;
+
+    }
+
+
+    /* =====================================================
+       CERRAR
+    ====================================================== */
+
+    #kommoClose {
+
+      position: fixed;
+
+      top: 12px;
+
+      right: 12px;
+
+      z-index: 100001;
+
+      width: 42px;
+
+      height: 42px;
+
+      border: 0;
+
+      border-radius: 50%;
+
+      background:
+        rgba(0,0,0,.65);
+
+      color: white;
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      cursor: pointer;
+
+    }
+
+
+    #kommoClose.is-open {
+
+      display: flex;
 
     }
 
@@ -406,12 +398,7 @@
 <body>
 
 
-  <!-- =====================================================
-       LANDING
-  ====================================================== -->
-
   <div class="wrapper">
-
 
     <img
       src="promo.jpeg"
@@ -425,13 +412,8 @@
     </p>
 
 
-    <!-- ===================================================
-         BOTÓN
-    ==================================================== -->
-
     <a
       href="#"
-      class="cta-btn"
       id="botonKommo"
     >
 
@@ -440,15 +422,8 @@
         alt="WhatsApp"
       >
 
-      <span class="btn-label">
+      <span>
         Escribime acá!
-      </span>
-
-      <span
-        class="btn-loading"
-        aria-live="polite"
-      >
-        Cargando chat...
       </span>
 
     </a>
@@ -457,7 +432,42 @@
 
 
   <!-- =====================================================
-       JAVASCRIPT DEL BOTÓN
+       CONTENEDOR DEL CHAT
+  ====================================================== -->
+
+  <div
+    id="kommoChatFrame"
+    aria-hidden="true"
+  ></div>
+
+
+  <button
+    id="kommoClose"
+    type="button"
+    aria-label="Cerrar chat"
+  >
+
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+
+      <path
+        d="M6 6L18 18M18 6L6 18"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+
+    </svg>
+
+  </button>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
   ====================================================== -->
 
   <script>
@@ -465,58 +475,118 @@
     (function () {
 
 
-      const btn =
+      const button =
         document.getElementById(
           'botonKommo'
         );
 
 
-      if (!btn) {
-        return;
+      const frame =
+        document.getElementById(
+          'kommoChatFrame'
+        );
+
+
+      const close =
+        document.getElementById(
+          'kommoClose'
+        );
+
+
+      /*
+       * Busca el iframe que Kommo
+       * haya creado automáticamente.
+       */
+
+      function findKommoChat() {
+
+        return document.querySelector(
+          '#amo-livechat'
+        );
+
       }
 
 
-      btn.addEventListener(
+      /*
+       * Mueve el chat generado por Kommo
+       * dentro de nuestro contenedor.
+       */
+
+      function prepareChat() {
+
+        const chat =
+          findKommoChat();
+
+
+        if (!chat)
+          return false;
+
+
+        if (
+          chat.parentElement !==
+          frame
+        ) {
+
+          frame.appendChild(
+            chat
+          );
+
+        }
+
+
+        return true;
+
+      }
+
+
+      /*
+       * Detectar cuando button.js
+       * termina de crear el chat.
+       */
+
+      const observer =
+        new MutationObserver(
+          function () {
+
+            prepareChat();
+
+          }
+        );
+
+
+      observer.observe(
+        document.body,
+        {
+          childList: true,
+          subtree: true
+        }
+      );
+
+
+      /*
+       * BOTÓN
+       */
+
+      button.addEventListener(
         'click',
         function (e) {
 
-
           e.preventDefault();
 
-          e.stopPropagation();
 
-
-          console.log(
-            'BOTON KOMMO CLICK'
-          );
-
-
-          /* ===============================================
-             META PIXEL
-          =============================================== */
+          /*
+           * Meta
+           */
 
           if (
             typeof fbq ===
             'function'
           ) {
 
-
-            /*
-             * Evento estándar:
-             * la persona inició contacto.
-             */
-
             fbq(
               'track',
               'Contact'
             );
-
-
-            /*
-             * Evento personalizado:
-             * permite identificar específicamente
-             * este botón en Events Manager.
-             */
 
             fbq(
               'trackCustom',
@@ -526,82 +596,105 @@
           }
 
 
-          /* ===============================================
-             ABRIR KOMMO
-          =============================================== */
+          /*
+           * Primero intentamos preparar
+           * el widget generado por Kommo.
+           */
 
-          if (
-            typeof crmPlugin ===
-            'function'
-          ) {
+          prepareChat();
 
 
-            console.log(
-              'crmPlugin encontrado'
-            );
+          /*
+           * Intentar API oficial.
+           */
 
+          try {
 
-            try {
+            if (
+              typeof crmPlugin ===
+              'function'
+            ) {
 
               crmPlugin(
                 'runChatShow'
               );
 
+            }
 
-              console.log(
-                'runChatShow ejecutado'
+          } catch (_) {}
+
+
+          /*
+           * Mostrar nuestro contenedor
+           * si Kommo ya creó el iframe.
+           */
+
+          setTimeout(
+            function () {
+
+              if (
+                prepareChat()
+              ) {
+
+                frame.classList.add(
+                  'is-open'
+                );
+
+                frame.setAttribute(
+                  'aria-hidden',
+                  'false'
+                );
+
+                close.classList.add(
+                  'is-open'
+                );
+
+              }
+
+            },
+            300
+          );
+
+        }
+      );
+
+
+      /*
+       * CERRAR
+       */
+
+      close.addEventListener(
+        'click',
+        function () {
+
+          frame.classList.remove(
+            'is-open'
+          );
+
+          frame.setAttribute(
+            'aria-hidden',
+            'true'
+          );
+
+          close.classList.remove(
+            'is-open'
+          );
+
+
+          try {
+
+            if (
+              typeof crmPlugin ===
+              'function'
+            ) {
+
+              crmPlugin(
+                'runChatHide'
               );
 
             }
-            catch (error) {
 
-              console.log(
-                'Error de Kommo:',
-                error
-              );
-
-            }
-
-
-          }
-          else {
-
-
-            console.log(
-              'crmPlugin todavía no existe'
-            );
-
-
-            /*
-             * Si Kommo tarda en cargar,
-             * lo intentamos nuevamente.
-             */
-
-            setTimeout(
-              function () {
-
-
-                if (
-                  typeof crmPlugin ===
-                  'function'
-                ) {
-
-                  try {
-
-                    crmPlugin(
-                      'runChatShow'
-                    );
-
-                  }
-                  catch (_) {}
-
-                }
-
-              },
-              500
-            );
-
-          }
+          } catch (_) {}
 
         }
       );
@@ -610,7 +703,6 @@
     })();
 
   </script>
-
 
 </body>
 
