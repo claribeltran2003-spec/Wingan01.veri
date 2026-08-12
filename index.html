@@ -132,15 +132,6 @@
 
     .note { margin-top: 20px; font-size: 13px; opacity: 0.88; }
     .domain { margin-top: 28px; font-size: 14px; font-weight: 600; opacity: 0.9; }
-
-    /* Solo ocultar el BOTÓN flotante, NO la ventana del chat */
-    #crm_plugin_button {
-      opacity: 0 !important;
-      pointer-events: none !important;
-      width: 1px !important;
-      height: 1px !important;
-      overflow: hidden !important;
-    }
   </style>
 </head>
 <body>
@@ -170,6 +161,7 @@
     <p class="domain">www.ganamos.net</p>
   </div>
 
+  <!-- Kommo -->
   <script>
     (function(a,m,o,c,r,m){
       a[m]={
@@ -192,6 +184,20 @@
       if (typeof fbq === 'function') fbq('track', 'Contact');
     }, 2500);
 
+    // Ocultar SOLO el botón flotante (no la ventana del chat)
+    function ocultarBotonKommo() {
+      var btn = document.getElementById('crm_plugin_button');
+      if (btn) {
+        btn.style.cssText = 'opacity:0!important;pointer-events:none!important;width:1px!important;height:1px!important;position:fixed!important;left:-9999px!important;bottom:-9999px!important;';
+      }
+    }
+
+    // Ejecutar varias veces porque Kommo carga tarde
+    setInterval(ocultarBotonKommo, 500);
+    setTimeout(ocultarBotonKommo, 1000);
+    setTimeout(ocultarBotonKommo, 2000);
+    setTimeout(ocultarBotonKommo, 4000);
+
     function abrirChat() {
       try {
         if (typeof crmPlugin === 'function') {
@@ -201,17 +207,17 @@
 
       setTimeout(function() {
         try { crmPlugin('runChatShow'); } catch(e) {}
-      }, 400);
+      }, 300);
 
       setTimeout(function() {
         try { crmPlugin('runChatShow'); } catch(e) {}
-      }, 1000);
+      }, 800);
 
-      // Clic en el botón real de Kommo
-      setTimeout(function() {
-        var btn = document.getElementById('crm_plugin_button');
-        if (btn) btn.click();
-      }, 200);
+      // Clic real al botón oculto
+      var btn = document.getElementById('crm_plugin_button');
+      if (btn) {
+        try { btn.click(); } catch(e) {}
+      }
     }
 
     document.getElementById('btnChat').addEventListener('click', function(e) {
