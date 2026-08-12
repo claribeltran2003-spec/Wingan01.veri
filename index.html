@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atención al Cliente</title>
+  <title>Ganamos | Atención Preferencial</title>
 
   <!-- Facebook Pixel -->
   <script>
@@ -25,15 +25,174 @@
   </noscript>
 
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      height: 100vh;
-      background: #f0f2f5;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 32px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      color: #c084fc;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #c084fc, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #a1a1aa;
+      line-height: 1.5;
+      margin-bottom: 40px;
+    }
+
+    .bonus-box {
+      background: linear-gradient(145deg, #1a1025, #0f0a14);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      border-radius: 20px;
+      padding: 28px 24px;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bonus-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #a855f7, transparent);
+    }
+
+    .bonus-amount {
+      font-size: 48px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #e879f9, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .bonus-text {
+      font-size: 15px;
+      color: #d4d4d8;
+      font-weight: 500;
+    }
+
+    .cta-text {
+      font-size: 15px;
+      color: #c084fc;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .arrow {
+      font-size: 28px;
+      color: #a855f7;
+      animation: bounce 1.8s infinite;
+      margin-bottom: 8px;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #71717a;
+      margin-top: 20px;
+    }
+
+    /* Pequeño brillo de fondo */
+    .glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: -1;
     }
   </style>
 </head>
 <body>
+
+  <div class="glow"></div>
+
+  <div class="container">
+    <div class="logo">GANAMOS</div>
+
+    <div class="badge">ATENCIÓN PREFERENCIAL</div>
+
+    <h1>Tu bono del <span>150%</span><br>está listo</h1>
+
+    <p class="subtitle">
+      Abrí el chat y un asesor te activa el bono de bienvenida en menos de 1 minuto.
+    </p>
+
+    <div class="bonus-box">
+      <div class="bonus-amount">150%</div>
+      <div class="bonus-text">en tu primera carga</div>
+    </div>
+
+    <div class="cta-text">Tocá el ícono de chat para continuar</div>
+    <div class="arrow">↓</div>
+
+    <p class="hint">Respuesta inmediata • Atención personalizada</p>
+  </div>
 
   <!-- Widget Kommo -->
   <script>
@@ -54,30 +213,51 @@
   </script>
 
   <script>
-    // Disparar Contact a los 2 segundos
-    setTimeout(function() {
-      fbq('track', 'Contact');
-      console.log('Evento Contact disparado');
-    }, 2000);
+    // Solo dispara Contact cuando el usuario abre el chat
+    let contactFired = false;
 
-    // Intentar abrir el chat
-    function openChat() {
-      try {
-        if (typeof crmPlugin === 'function') {
-          crmPlugin('runChatShow');
-        }
-      } catch (e) {}
+    function fireContact() {
+      if (contactFired) return;
+      contactFired = true;
+      fbq('track', 'Contact');
+      console.log('Evento Contact disparado por apertura de chat');
     }
 
-    const forceOpen = setInterval(openChat, 300);
-    setTimeout(function() {
-      clearInterval(forceOpen);
-    }, 8000);
+    // Detecta cuando aparece el chat de Kommo (MutationObserver)
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.addedNodes.length) {
+          mutation.addedNodes.forEach(function(node) {
+            if (node.nodeType === 1) {
+              // Detecta el contenedor del chat de Kommo
+              if (
+                node.id && node.id.includes('crm') ||
+                node.className && (
+                  String(node.className).includes('kommo') ||
+                  String(node.className).includes('amo') ||
+                  String(node.className).includes('chat')
+                ) ||
+                (node.querySelector && node.querySelector('[class*="chat"], [id*="crm"]'))
+              ) {
+                fireContact();
+              }
+            }
+          });
+        }
+      });
+    });
 
-    window.addEventListener('load', function() {
-      openChat();
-      setTimeout(openChat, 400);
-      setTimeout(openChat, 900);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    // También escuchamos clicks en el botón del chat (por si el observer falla)
+    document.addEventListener('click', function(e) {
+      const target = e.target.closest('[id*="crm"], [class*="kommo"], [class*="amo-button"], [class*="chat-button"]');
+      if (target) {
+        setTimeout(fireContact, 300);
+      }
     });
   </script>
 
