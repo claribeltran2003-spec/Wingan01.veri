@@ -3,138 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ff5a2a">
-<title>KINGS Landing V7</title>
-
-<script>
-window.crmPluginConfig={
- hidden:true,
- color:'#ff5a2a',
- onlinechat:{
-  mode:'frame',
-  container:'#kommoChatFrame',
-  locale:{extends:'es',compose_placeholder:'Escribí tu mensaje...'}
- }
-};
-</script>
-
+<title>KINGS Landing V8</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
 font-family:Arial,sans-serif;
-background:#090303;
+background:#080202;
 color:#fff;
 min-height:100vh;
-overflow:hidden;
 }
 body:before{
 content:"";
 position:fixed;inset:0;
 background:
-radial-gradient(circle at 50% 25%,rgba(255,90,42,.18),transparent 35%),
-radial-gradient(circle at 50% 75%,rgba(255,90,42,.14),transparent 45%);
+radial-gradient(circle at 50% 35%,rgba(255,90,42,.18),transparent 40%),
+radial-gradient(circle at 50% 85%,rgba(255,90,42,.12),transparent 45%);
 pointer-events:none;
 }
 .container{
-width:min(430px,100vw);
-margin:auto;
-padding:24px 22px 30px;
+max-width:430px;
+margin:0 auto;
+padding:28px 20px 40px;
 text-align:center;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
 }
-.logo{font-size:52px;font-weight:900}
-.tag{
+.header{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:16px;
+margin-bottom:45px;
+}
+.logo-box{
+width:88px;height:88px;
+border-radius:24px;
+background:#ff5a2a;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:52px;
+font-weight:900;
+color:#000;
+}
+.brand-wrap{text-align:left}
+.brand{
+font-size:62px;
+font-weight:900;
+line-height:1;
+}
+.platform{
+margin-top:8px;
 display:inline-block;
-border:1px solid rgba(255,255,255,.15);
-padding:10px 18px;
+padding:12px 22px;
 border-radius:999px;
-margin:12px auto 28px;
+border:1px solid rgba(255,255,255,.15);
+letter-spacing:4px;
+font-size:13px;
 }
 .ops{
-letter-spacing:4px;
-font-size:12px;
-color:#cfcfcf;
-margin-bottom:28px;
+margin-bottom:38px;
+letter-spacing:6px;
+color:#d0d0d0;
+font-size:13px;
 }
 h1{
 font-size:58px;
 line-height:.95;
-margin-bottom:20px;
+margin-bottom:22px;
 }
 .trust{
-padding:15px;
+padding:16px;
 border-radius:18px;
-border:1px solid rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.08);
 background:rgba(255,255,255,.03);
-margin-bottom:20px;
 text-align:left;
+margin-bottom:22px;
 }
 .trust b{color:#ff7440}
 .trust div{margin-top:6px;font-size:13px}
-.cta-text{
+.cta{
 color:#ff7440;
 letter-spacing:4px;
-line-height:1.7;
-margin-bottom:12px;
+line-height:1.8;
+margin-bottom:8px;
 }
 .arrow{
-font-size:56px;
+font-size:60px;
 color:#ff5a2a;
-animation:bounce 1.8s infinite;
 margin-bottom:10px;
 }
 .bonus{
-cursor:pointer;
 border:3px solid #ff5a2a;
 border-radius:34px;
-padding:28px 18px;
+padding:30px 20px;
 box-shadow:0 0 40px rgba(255,90,42,.35);
-animation:pulse 2s infinite;
 }
 .percent{
-font-size:96px;
+font-size:100px;
 font-weight:900;
 color:#ff5a2a;
-line-height:1;
 }
 .sub{
 font-size:17px;
 letter-spacing:3px;
-line-height:1.6;
-}
-.helper{
-margin-top:10px;
-font-size:13px;
-color:#ff9c79;
-}
-@keyframes pulse{50%{transform:scale(1.02)}}
-@keyframes bounce{50%{transform:translateY(8px)}}
-
-#kommoChatFrame{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.92);
-visibility:hidden;
-opacity:0;
-transition:.3s;
-z-index:9999;
-}
-#kommoChatFrame.is-open{visibility:visible;opacity:1}
-#kommoChatFrame iframe{
-width:100%!important;
-height:100%!important;
-border:0!important;
+line-height:1.7;
 }
 </style>
 </head>
 <body>
-
 <div class="container">
-<div class="logo">KINGS</div>
-<div class="tag">PLATAFORMA GANAMOS</div>
+
+<div class="header">
+<div class="logo-box">K</div>
+<div class="brand-wrap">
+<div class="brand">KINGS</div>
+<div class="platform">PLATAFORMA GANAMOS</div>
+</div>
+</div>
 
 <div class="ops">● OPERADORES EN LÍNEA AHORA</div>
 
@@ -147,60 +131,14 @@ border:0!important;
 <div>✓ Un asesor real te responderá en minutos</div>
 </div>
 
-<div class="cta-text">HACÉ CLICK AQUÍ Y TE<br>CREAMOS TU CUENTA</div>
-
+<div class="cta">HACÉ CLICK AQUÍ Y TE<br>CREAMOS TU CUENTA</div>
 <div class="arrow">↓</div>
 
-<div class="bonus" id="bonusKommo">
+<div class="bonus">
 <div class="percent">30%</div>
 <div class="sub">EXTRA DE BONO EN TU<br>PRIMER DEPÓSITO</div>
 </div>
 
-<div class="helper">👇 Tocá el bono para abrir el chat</div>
 </div>
-
-<div id="kommoChatFrame"></div>
-
-<script>
-(function(a,m,o,c,r,mn){
-a[mn]={
-id:"1078895",
-hash:"7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
-locale:"es"
-};
-a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};
-var d=a.document,s=d.createElement('script');
-s.async=true;
-s.src='https://gso.kommo.com/js/button.js';
-d.head.appendChild(s);
-}(window,0,'crmPlugin',0,0,'crm_plugin'));
-
-const frame=document.getElementById('kommoChatFrame');
-const bonus=document.getElementById('bonusKommo');
-let ready=false,pending=false;
-
-function openChat(){
- if(ready){
-   frame.classList.add('is-open');
-   try{crmPlugin('runChatShow')}catch(e){}
- }else{
-   pending=true;
- }
-}
-
-function bind(){
- if(typeof crmPlugin!=='function'){
-   setTimeout(bind,100);
-   return;
- }
- crmPlugin('onChatReady',function(){
-   ready=true;
-   if(pending){pending=false;openChat();}
- });
-}
-bonus.addEventListener('click',openChat);
-bind();
-</script>
-
 </body>
 </html>
