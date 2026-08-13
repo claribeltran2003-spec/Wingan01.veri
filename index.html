@@ -3,221 +3,160 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ff5a1f">
-<title>Kings Ganamos CHAT</title>
+<meta name="theme-color" content="#ff5a2a">
+<title>KINGS Landing V7</title>
+
+<script>
+window.crmPluginConfig={
+ hidden:true,
+ color:'#ff5a2a',
+ onlinechat:{
+  mode:'frame',
+  container:'#kommoChatFrame',
+  locale:{extends:'es',compose_placeholder:'Escribí tu mensaje...'}
+ }
+};
+</script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 body{
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-background:#080202;
+font-family:Arial,sans-serif;
+background:#090303;
 color:#fff;
-overflow-x:hidden;
+min-height:100vh;
+overflow:hidden;
 }
-
-body::before{
+body:before{
 content:"";
-position:fixed;
-inset:0;
+position:fixed;inset:0;
 background:
-radial-gradient(circle at 50% 25%,rgba(255,90,31,.12),transparent 35%),
-radial-gradient(circle at 50% 70%,rgba(255,90,31,.20),transparent 40%),
-radial-gradient(circle at 15% 50%,rgba(255,90,31,.08),transparent 30%),
-radial-gradient(circle at 85% 50%,rgba(255,90,31,.08),transparent 30%);
+radial-gradient(circle at 50% 25%,rgba(255,90,42,.18),transparent 35%),
+radial-gradient(circle at 50% 75%,rgba(255,90,42,.14),transparent 45%);
 pointer-events:none;
 }
-
 .container{
-max-width:480px;
+width:min(430px,100vw);
 margin:auto;
-padding:70px 28px 120px;
-min-height:100vh;
-}
-
-.header{
+padding:24px 22px 30px;
+text-align:center;
+height:100vh;
 display:flex;
-align-items:center;
-gap:12px;
-margin-bottom:70px;
-}
-
-.logo{
-width:60px;
-height:60px;
-border-radius:16px;
-background:#ff5a1f;
-display:flex;
-align-items:center;
+flex-direction:column;
 justify-content:center;
-font-size:32px;
-font-weight:900;
-color:#000;
 }
-
-.brand{
-font-size:34px;
-font-weight:800;
-}
-
-.badge{
-margin-left:auto;
-padding:10px 14px;
+.logo{font-size:52px;font-weight:900}
+.tag{
+display:inline-block;
 border:1px solid rgba(255,255,255,.15);
+padding:10px 18px;
 border-radius:999px;
-font-size:11px;
-letter-spacing:2px;
-color:#d4d4d4;
+margin:12px auto 28px;
 }
-
-.online{
-margin-bottom:60px;
+.ops{
+letter-spacing:4px;
 font-size:12px;
-letter-spacing:5px;
-color:#a3a3a3;
+color:#cfcfcf;
+margin-bottom:28px;
 }
-
 h1{
-font-size:54px;
-line-height:1;
-font-weight:900;
-margin-bottom:50px;
+font-size:58px;
+line-height:.95;
+margin-bottom:20px;
 }
-
-.desc{
-text-align:center;
-color:#ff6b35;
-font-size:16px;
-letter-spacing:5px;
-line-height:1.8;
-margin-bottom:50px;
+.trust{
+padding:15px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.1);
+background:rgba(255,255,255,.03);
+margin-bottom:20px;
+text-align:left;
 }
-
+.trust b{color:#ff7440}
+.trust div{margin-top:6px;font-size:13px}
+.cta-text{
+color:#ff7440;
+letter-spacing:4px;
+line-height:1.7;
+margin-bottom:12px;
+}
 .arrow{
-text-align:center;
 font-size:56px;
-color:#ff5a1f;
-margin-bottom:55px;
+color:#ff5a2a;
+animation:bounce 1.8s infinite;
+margin-bottom:10px;
 }
-
 .bonus{
-position:relative;
 cursor:pointer;
-border:2px solid #ff5a1f;
+border:3px solid #ff5a2a;
 border-radius:34px;
-padding:50px 24px;
-text-align:center;
-box-shadow:0 0 25px rgba(255,90,31,.25),0 0 60px rgba(255,90,31,.15);
-animation:pulseGlow 2.5s infinite;
-transition:.25s;
+padding:28px 18px;
+box-shadow:0 0 40px rgba(255,90,42,.35);
+animation:pulse 2s infinite;
 }
-
-.bonus::before{
-content:"";
-position:absolute;
-inset:-40px;
-background:radial-gradient(circle,rgba(255,90,31,.20),transparent 70%);
-z-index:-1;
-}
-
-.bonus:hover{
-transform:translateY(-4px);
-}
-
 .percent{
 font-size:96px;
 font-weight:900;
-color:#ff5a1f;
+color:#ff5a2a;
+line-height:1;
 }
-
-.btext{
-margin-top:12px;
-font-size:18px;
-letter-spacing:4px;
-line-height:1.8;
+.sub{
+font-size:17px;
+letter-spacing:3px;
+line-height:1.6;
 }
-
-@keyframes pulseGlow{
-0%{
-transform:scale(1);
-box-shadow:0 0 25px rgba(255,90,31,.25),0 0 60px rgba(255,90,31,.15);
+.helper{
+margin-top:10px;
+font-size:13px;
+color:#ff9c79;
 }
-50%{
-transform:scale(1.02);
-box-shadow:0 0 40px rgba(255,90,31,.45),0 0 120px rgba(255,90,31,.30);
-}
-100%{
-transform:scale(1);
-box-shadow:0 0 25px rgba(255,90,31,.25),0 0 60px rgba(255,90,31,.15);
-}
-}
+@keyframes pulse{50%{transform:scale(1.02)}}
+@keyframes bounce{50%{transform:translateY(8px)}}
 
 #kommoChatFrame{
 position:fixed;
 inset:0;
+background:rgba(0,0,0,.92);
 visibility:hidden;
 opacity:0;
 transition:.3s;
-background:rgba(0,0,0,.92);
 z-index:9999;
 }
-
-#kommoChatFrame.is-open{
-visibility:visible;
-opacity:1;
-}
-
+#kommoChatFrame.is-open{visibility:visible;opacity:1}
 #kommoChatFrame iframe{
 width:100%!important;
 height:100%!important;
 border:0!important;
 }
-
-@media(max-width:480px){
-h1{font-size:48px}
-.percent{font-size:84px}
-}
 </style>
-
-<script>
-window.crmPluginConfig={
-hidden:true,
-color:'#ff5a1f',
-onlinechat:{
-mode:'frame',
-container:'#kommoChatFrame',
-locale:{extends:'es'}
-}
-};
-</script>
 </head>
-
 <body>
 
 <div class="container">
+<div class="logo">KINGS</div>
+<div class="tag">PLATAFORMA GANAMOS</div>
 
-<div class="header">
-<div class="logo">G</div>
-<div class="brand">KINGS</div>
-<div class="badge">PLATAFORMA GANAMOS</div>
-</div>
-
-<div class="online">● OPERADORES EN LÍNEA AHORA</div>
+<div class="ops">● OPERADORES EN LÍNEA AHORA</div>
 
 <h1>Cargá y jugá<br>en minutos</h1>
 
-<div class="desc">
-HACÉ CLICK AQUÍ Y TE<br>
-CREAMOS TU CUENTA
+<div class="trust">
+<b>⚡ Atención inmediata</b>
+<div>✓ Te atendemos directamente en esta página</div>
+<div>✓ Sin redirecciones ni descargas</div>
+<div>✓ Un asesor real te responderá en minutos</div>
 </div>
+
+<div class="cta-text">HACÉ CLICK AQUÍ Y TE<br>CREAMOS TU CUENTA</div>
 
 <div class="arrow">↓</div>
 
 <div class="bonus" id="bonusKommo">
 <div class="percent">30%</div>
-<div class="btext">EXTRA DE BONO EN TU<br>PRIMER DEPÓSITO</div>
+<div class="sub">EXTRA DE BONO EN TU<br>PRIMER DEPÓSITO</div>
 </div>
 
+<div class="helper">👇 Tocá el bono para abrir el chat</div>
 </div>
 
 <div id="kommoChatFrame"></div>
@@ -238,35 +177,29 @@ d.head.appendChild(s);
 
 const frame=document.getElementById('kommoChatFrame');
 const bonus=document.getElementById('bonusKommo');
-
 let ready=false,pending=false;
 
-function openKommo(){
-if(ready){
-frame.classList.add('is-open');
-try{crmPlugin('runChatShow')}catch(e){}
-}else{
-pending=true;
-}
-}
-
-function bindKommo(){
-if(typeof crmPlugin!=='function'){
-setTimeout(bindKommo,100);
-return;
+function openChat(){
+ if(ready){
+   frame.classList.add('is-open');
+   try{crmPlugin('runChatShow')}catch(e){}
+ }else{
+   pending=true;
+ }
 }
 
-crmPlugin('onChatReady',function(){
-ready=true;
-if(pending){
-pending=false;
-openKommo();
+function bind(){
+ if(typeof crmPlugin!=='function'){
+   setTimeout(bind,100);
+   return;
+ }
+ crmPlugin('onChatReady',function(){
+   ready=true;
+   if(pending){pending=false;openChat();}
+ });
 }
-});
-}
-
-bonus.addEventListener('click',openKommo);
-bindKommo();
+bonus.addEventListener('click',openChat);
+bind();
 </script>
 
 </body>
