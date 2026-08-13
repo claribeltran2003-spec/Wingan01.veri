@@ -1,39 +1,17 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = """<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#2563EB">
-<title>GANAMOS - Hydra Premium</title>
-
-<script>
-window.crmPluginConfig={
- hidden:true,
- color:'#2563EB',
- onlinechat:{
-  mode:'frame',
-  container:'#kommoChatFrame',
-  locale:{extends:'es',compose_placeholder:'Escribí tu mensaje...'}
- }
-};
-</script>
-
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
-t=b.createElement(e);t.async=!0;t.src=v;
-s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
-}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','1993981097970015');
-fbq('track','PageView');
-</script>
-
+<meta name="theme-color" content="#ff5a1f">
+<title>GANAMOS - Hydra Orange</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-font-family:Inter,Segoe UI,Arial,sans-serif;
-background:#030712;
+font-family:Inter,Arial,sans-serif;
+background:#070303;
 color:#fff;
 min-height:100vh;
 overflow:hidden;
@@ -41,176 +19,154 @@ overflow:hidden;
 .bg{
 position:fixed;inset:0;
 background:
-radial-gradient(circle at 50% 20%,rgba(37,99,235,.35),transparent 35%),
-radial-gradient(circle at 80% 0%,rgba(59,130,246,.20),transparent 30%);
-filter:blur(20px);
+radial-gradient(circle at 50% 70%,rgba(255,90,31,.18),transparent 30%),
+radial-gradient(circle at 50% 30%,rgba(255,90,31,.10),transparent 40%);
+filter:blur(30px);
 }
-.container{
-position:relative;
-z-index:2;
-height:100vh;
-display:flex;
+.wrap{
+position:relative;z-index:2;
+max-width:480px;height:100vh;
+margin:auto;padding:32px 24px;
+display:flex;flex-direction:column;
 justify-content:center;
-align-items:center;
-padding:24px;
 }
-.card{
-width:100%;
-max-width:480px;
-text-align:center;
+.top{display:flex;align-items:center;gap:14px;margin-bottom:36px}
+.logo{
+width:56px;height:56px;border-radius:14px;
+background:#ff5a1f;display:flex;align-items:center;justify-content:center;
+font-weight:900;font-size:28px;color:#000;
 }
+.brand{font-size:28px;font-weight:800}
 .badge{
-display:inline-block;
-padding:10px 18px;
-border:1px solid rgba(255,255,255,.12);
-border-radius:999px;
-margin-bottom:22px;
-color:#cbd5e1;
-backdrop-filter:blur(12px);
+margin-left:8px;padding:10px 16px;border-radius:999px;
+border:1px solid rgba(255,255,255,.12);color:#cfcfcf;font-size:12px;
+letter-spacing:3px;
+}
+.online{
+color:#9f9f9f;font-size:12px;letter-spacing:6px;
+margin-bottom:30px;
 }
 h1{
-font-size:68px;
-line-height:.9;
-font-weight:900;
-margin-bottom:18px;
+font-size:72px;line-height:.92;font-weight:900;
+margin-bottom:26px;
 }
 .desc{
-color:#94a3b8;
-font-size:18px;
-margin-bottom:25px;
+color:#ff6b35;font-size:18px;letter-spacing:6px;
+line-height:1.8;text-transform:uppercase;
+text-align:center;margin-bottom:18px;
 }
 .arrow{
-font-size:46px;
-color:#60a5fa;
-animation:bounce 1.8s infinite;
+text-align:center;color:#ff5a1f;font-size:54px;
+margin-bottom:24px;
 }
 .bonus{
-margin-top:24px;
-background:linear-gradient(180deg,#111827,#0f172a);
-border:1px solid rgba(255,255,255,.08);
+border:2px solid #ff5a1f;
 border-radius:32px;
-padding:34px;
-box-shadow:0 0 70px rgba(37,99,235,.22);
+padding:38px 24px;
+text-align:center;
+box-shadow:0 0 35px rgba(255,90,31,.25);
 }
 .percent{
-font-size:92px;
-font-weight:900;
-background:linear-gradient(#93c5fd,#2563eb);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+font-size:96px;font-weight:900;color:#ff5a1f;
+}
+.btext{
+margin-top:10px;
+letter-spacing:4px;
+line-height:1.8;
 }
 .btn{
-margin-top:26px;
-display:inline-flex;
-align-items:center;
-justify-content:center;
-width:100%;
+display:block;
+margin:30px auto 0;
 max-width:340px;
+text-align:center;
 padding:18px;
 border-radius:999px;
-text-decoration:none;
-font-weight:800;
+background:linear-gradient(135deg,#ff5a1f,#ff7a1f);
+color:#fff;text-decoration:none;font-weight:800;
 font-size:20px;
-color:#fff;
-background:linear-gradient(135deg,#2563EB,#3B82F6);
-box-shadow:0 15px 45px rgba(37,99,235,.4);
 }
-.trust{margin-top:18px;color:#94a3b8;font-size:13px}
-#kommoChatFrame{
-position:fixed;inset:0;z-index:9999;
-visibility:hidden;opacity:0;
-transition:.3s;
-background:rgba(0,0,0,.85);
-}
-#kommoChatFrame.is-open{visibility:visible;opacity:1}
+#kommoChatFrame{position:fixed;inset:0;display:none;z-index:9999}
+#kommoChatFrame.is-open{display:block}
 #kommoChatFrame iframe{width:100%!important;height:100%!important;border:0!important}
-#kommoClose{
-position:fixed;top:15px;right:15px;z-index:10000;
-width:44px;height:44px;border:none;border-radius:50%;
-background:#111827;color:#fff;display:none;cursor:pointer;
-}
-#kommoClose.is-open{display:block}
-@keyframes bounce{50%{transform:translateY(10px)}}
 </style>
+
+<script>
+window.crmPluginConfig={hidden:true,color:'#ff5a1f',onlinechat:{mode:'frame',container:'#kommoChatFrame'}};
+</script>
+
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1993981097970015');fbq('track','PageView');
+</script>
 </head>
 <body>
 
 <div class="bg"></div>
 
-<div class="container">
-<div class="card">
-<div class="badge">✓ PLATAFORMA SEGURA</div>
-<h1>GANÁ<br>MÁS</h1>
-<p class="desc">Atención personalizada y activación rápida.</p>
+<div class="wrap">
+<div class="top">
+<div class="logo">H</div>
+<div class="brand">Hydra</div>
+<div class="badge">PLATAFORMA GANAMOS</div>
+</div>
+
+<div class="online">● OPERADORES EN LÍNEA AHORA</div>
+
+<h1>Cargá y jugá<br>en minutos</h1>
+
+<div class="desc">
+HACÉ CLICK AQUÍ Y TE<br>CREAMOS TU CUENTA
+</div>
+
 <div class="arrow">↓</div>
 
 <div class="bonus">
 <div class="percent">30%</div>
-<div style="font-weight:700;letter-spacing:2px">BONO DE BIENVENIDA</div>
+<div class="btext">EXTRA DE BONO EN TU<br>PRIMER DEPÓSITO</div>
 </div>
 
-<a href="#" id="botonKommo" class="btn">💬 HABLAR AHORA</a>
-
-<div class="trust">✓ Soporte • ✓ Seguro • ✓ Rápido</div>
-</div>
+<a href="#" id="botonKommo" class="btn">CREAR MI CUENTA</a>
 </div>
 
 <div id="kommoChatFrame"></div>
-<button id="kommoClose">✕</button>
 
 <script>
 (function(a,m,o,c,r,mn){
-a[mn]={
-id:"1078895",
-hash:"7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",
-locale:"es"
-};
+a[mn]={id:"1078895",hash:"7afe8c661ae21b1eb55f38b542603609f977ea292469fbd2b5cb0cf03380b008",locale:"es"};
 a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};
 var d=a.document,s=d.createElement('script');
-s.async=true;s.id=mn+'_script';
-s.src='https://gso.kommo.com/js/button.js';
+s.async=true;s.id=mn+'_script';s.src='https://gso.kommo.com/js/button.js';
 d.head.appendChild(s);
 }(window,0,'crmPlugin',0,0,'crm_plugin'));
-</script>
 
-<script>
-(function(){
-const frame=document.getElementById('kommoChatFrame');
-const closeBtn=document.getElementById('kommoClose');
 const btn=document.getElementById('botonKommo');
 let ready=false,pending=false;
 
-function openReal(){
-frame.classList.add('is-open');
-closeBtn.classList.add('is-open');
-try{crmPlugin('runChatShow')}catch(e){}
-try{
-fbq('track','Contact');
-fbq('trackCustom','ClickBotonKommo');
-}catch(e){}
-}
 function openChat(e){
 e.preventDefault();
-if(ready){openReal();return;}
-pending=true;
+if(ready){crmPlugin('runChatShow');document.getElementById('kommoChatFrame').classList.add('is-open');}
+else pending=true;
+fbq('track','Contact');
 }
-function closeChat(){
-frame.classList.remove('is-open');
-closeBtn.classList.remove('is-open');
-try{crmPlugin('runChatHide')}catch(e){}
-}
+
 function bind(){
 if(typeof crmPlugin!=='function'){setTimeout(bind,100);return;}
-crmPlugin('onChatReady',function(){
+crmPlugin('onChatReady',()=>{
 ready=true;
-if(pending){pending=false;openReal();}
+if(pending){pending=false;crmPlugin('runChatShow');}
 });
 }
 btn.addEventListener('click',openChat);
-closeBtn.addEventListener('click',closeChat);
 bind();
-})();
 </script>
 
 </body>
-</html>
+</html>"""
+
+path="/mnt/data/HYDRA_GANAMOS_COMPLETA.html"
+Path(path).write_text(html, encoding="utf-8")
+print(path)
+
