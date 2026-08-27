@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,16 +12,14 @@
 
 <meta
   name="theme-color"
-  content="#0a0a0a"
+  content="#080808"
 >
 
 <title>Sofi de la Suerte</title>
 
 
 <!-- =========================================================
-     KOMMO
-     CHATWEB SOFI DE LA SUERTE
-     ID: 1079233
+     KOMMO CONFIG
      ========================================================= -->
 
 <script>
@@ -109,7 +108,6 @@ window.crmPluginConfig = {
 
 <!-- =========================================================
      META PIXEL
-     SOLO PAGEVIEW
      ========================================================= -->
 
 <script>
@@ -117,7 +115,6 @@ window.crmPluginConfig = {
 (function(){
 
   'use strict';
-
 
   !function(f,b,e,v,n,t,s){
 
@@ -134,10 +131,8 @@ window.crmPluginConfig = {
 
     };
 
-
     if(!f._fbq)
       f._fbq=n;
-
 
     n.push=n;
 
@@ -147,13 +142,11 @@ window.crmPluginConfig = {
 
     n.queue=[];
 
-
     t=b.createElement(e);
 
     t.async=true;
 
     t.src=v;
-
 
     s=b.getElementsByTagName(e)[0];
 
@@ -184,7 +177,7 @@ window.crmPluginConfig = {
 
 
 <!-- =========================================================
-     NOSCRIPT PAGEVIEW
+     NOSCRIPT
      ========================================================= -->
 
 <noscript>
@@ -209,9 +202,7 @@ window.crmPluginConfig = {
 *{
 
   margin:0;
-
   padding:0;
-
   box-sizing:border-box;
 
 }
@@ -225,12 +216,11 @@ html,
 body{
 
   width:100%;
-
   height:100%;
 
   overflow:hidden;
 
-  background:#0a0a0a;
+  background:#080808;
 
   font-family:
     -apple-system,
@@ -247,7 +237,247 @@ body{
 
 
 /* =========================================================
-   KOMMO CHAT FRAME
+   PANTALLA DE BIENVENIDA
+   ========================================================= */
+
+#welcome{
+
+  position:fixed;
+
+  inset:0;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-direction:column;
+
+  text-align:center;
+
+  padding:30px;
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      rgba(212,175,55,0.12),
+      transparent 45%
+    ),
+
+    linear-gradient(
+      135deg,
+      #080808 0%,
+      #10100d 50%,
+      #050505 100%
+    );
+
+  z-index:1000000;
+
+  opacity:1;
+
+  visibility:visible;
+
+  transition:
+    opacity .18s ease,
+    visibility .18s ease;
+
+}
+
+
+/* =========================================================
+   OCULTAR BIENVENIDA
+   ========================================================= */
+
+#welcome.hide{
+
+  opacity:0;
+
+  visibility:hidden;
+
+  pointer-events:none;
+
+}
+
+
+/* =========================================================
+   ICONO
+   ========================================================= */
+
+.welcome-icon{
+
+  width:72px;
+
+  height:72px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  margin-bottom:22px;
+
+  border:2px solid #d4af37;
+
+  border-radius:50%;
+
+  color:#d4af37;
+
+  font-size:32px;
+
+  box-shadow:
+    0 0 25px rgba(212,175,55,.18);
+
+}
+
+
+/* =========================================================
+   TEXTO SUPERIOR
+   ========================================================= */
+
+.welcome-small{
+
+  margin-bottom:10px;
+
+  color:#25D366;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  letter-spacing:3px;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =========================================================
+   TITULO
+   ========================================================= */
+
+.welcome-title{
+
+  font-size:
+    clamp(28px, 8vw, 52px);
+
+  line-height:1.05;
+
+  font-weight:900;
+
+  letter-spacing:-1px;
+
+  text-transform:uppercase;
+
+  color:#fff;
+
+  text-shadow:
+    0 2px 20px rgba(0,0,0,.6);
+
+}
+
+
+/* =========================================================
+   SOFI
+   ========================================================= */
+
+.welcome-title span{
+
+  display:block;
+
+  margin-top:5px;
+
+  color:#d4af37;
+
+  text-shadow:
+    0 0 20px rgba(212,175,55,.20);
+
+}
+
+
+/* =========================================================
+   SUBTITULO
+   ========================================================= */
+
+.welcome-subtitle{
+
+  margin-top:18px;
+
+  color:#a7a7a7;
+
+  font-size:14px;
+
+  font-weight:500;
+
+}
+
+
+/* =========================================================
+   LINEA DECORATIVA
+   ========================================================= */
+
+.welcome-line{
+
+  width:90px;
+
+  height:2px;
+
+  margin-top:25px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #d4af37,
+      transparent
+    );
+
+}
+
+
+/* =========================================================
+   INDICADOR ONLINE
+   ========================================================= */
+
+.online{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  margin-top:20px;
+
+  color:#25D366;
+
+  font-size:12px;
+
+  font-weight:600;
+
+}
+
+
+.online-dot{
+
+  width:7px;
+
+  height:7px;
+
+  border-radius:50%;
+
+  background:#25D366;
+
+  box-shadow:
+    0 0 10px rgba(37,211,102,.7);
+
+}
+
+
+/* =========================================================
+   KOMMO FRAME
    ========================================================= */
 
 #kommoChatFrame{
@@ -260,15 +490,13 @@ body{
 
   height:100%;
 
-  background:#0a0a0a;
+  background:#080808;
 
   visibility:hidden;
 
   opacity:0;
 
-  z-index:9999;
-
-  transition:none;
+  z-index:999999;
 
 }
 
@@ -287,10 +515,14 @@ body{
 
 
 /* =========================================================
-   IFRAME KOMMO
+   IFRAME
    ========================================================= */
 
 #kommoChatFrame iframe{
+
+  position:absolute;
+
+  inset:0;
 
   width:100% !important;
 
@@ -313,7 +545,48 @@ body{
 
 
 <!-- =========================================================
-     CONTENEDOR KOMMO
+     BIENVENIDA
+     ========================================================= -->
+
+<div id="welcome">
+
+  <div class="welcome-icon">
+    ♠
+  </div>
+
+  <div class="welcome-small">
+    Atención online
+  </div>
+
+  <div class="welcome-title">
+
+    BIENVENIDO
+
+    <span>
+      A SOFI DE LA SUERTE
+    </span>
+
+  </div>
+
+  <div class="welcome-subtitle">
+    Tu atención comienza ahora
+  </div>
+
+  <div class="welcome-line"></div>
+
+  <div class="online">
+
+    <div class="online-dot"></div>
+
+    Operador online
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     KOMMO
      ========================================================= -->
 
 <div id="kommoChatFrame"></div>
@@ -322,7 +595,7 @@ body{
 <script>
 
 /* =========================================================
-   ELEMENTO
+   ELEMENTOS
    ========================================================= */
 
 const frame =
@@ -331,9 +604,11 @@ const frame =
   );
 
 
-/* =========================================================
-   EVITAR DOBLE APERTURA
-   ========================================================= */
+const welcome =
+  document.getElementById(
+    'welcome'
+  );
+
 
 let chatOpened = false;
 
@@ -351,38 +626,44 @@ function openChat(){
   }
 
 
-  chatOpened = true;
-
-
-  /*
-   * Primero mostramos el contenedor.
-   * Esto permite que Kommo pueda renderizar
-   * correctamente el iframe.
-   */
-
-  frame.classList.add(
-    'is-open'
-  );
-
-
-  /*
-   * Inmediatamente después
-   * ejecutamos la apertura de Kommo.
-   */
-
   try{
+
+    /*
+     * Primero mostramos el frame
+     */
+
+    frame.classList.add(
+      'is-open'
+    );
+
+
+    /*
+     * Abrimos Kommo
+     */
 
     crmPlugin(
       'runChatShow'
     );
 
+
+    chatOpened = true;
+
+
+    /*
+     * Ocultar bienvenida
+     */
+
+    welcome.classList.add(
+      'hide'
+    );
+
+
     console.log(
       '✅ SOFI DE LA SUERTE - CHAT ABIERTO'
     );
 
-  }catch(error){
 
-    chatOpened = false;
+  }catch(error){
 
     console.error(
       '❌ ERROR KOMMO:',
@@ -395,7 +676,7 @@ function openChat(){
 
 
 /* =========================================================
-   ESPERAR ÚNICAMENTE A KOMMO
+   ESPERAR A KOMMO
    ========================================================= */
 
 function initChat(){
@@ -414,23 +695,9 @@ function initChat(){
   }
 
 
-  /*
-   * Nos enganchamos al evento real
-   * de Kommo.
-   */
-
   crmPlugin(
     'onChatReady',
     function(){
-
-      console.log(
-        '✅ KOMMO CHAT READY'
-      );
-
-
-      /*
-       * Abrir inmediatamente.
-       */
 
       openChat();
 
@@ -451,3 +718,6 @@ initChat();
 
 </body>
 </html>
+```
+
+La pantalla de bienvenida queda **por encima de todo**, así que ese segundo que tarda Kommo ya no se percibe como una pantalla negra. En cuanto Kommo dispara `onChatReady`, se abre el chat y desaparece la bienvenida.
