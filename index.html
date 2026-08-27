@@ -18,9 +18,7 @@
 
 
 <!-- =========================================================
-     KOMMO
-     CHATWEB SOFI DE LA SUERTE
-     ID: 1079233
+     KOMMO CONFIG
      ========================================================= -->
 
 <script>
@@ -183,7 +181,7 @@ window.crmPluginConfig = {
 
 
 <!-- =========================================================
-     NOSCRIPT PAGEVIEW
+     NOSCRIPT
      ========================================================= -->
 
 <noscript>
@@ -208,9 +206,7 @@ window.crmPluginConfig = {
 *{
 
   margin:0;
-
   padding:0;
-
   box-sizing:border-box;
 
 }
@@ -224,8 +220,10 @@ html,
 body{
 
   width:100%;
-
   height:100%;
+
+  margin:0;
+  padding:0;
 
   overflow:hidden;
 
@@ -244,24 +242,22 @@ body{
 
 
 /* =========================================================
-   CHAT KOMMO
+   KOMMO FRAME
    ========================================================= */
 
 #kommoChatFrame{
 
   position:fixed;
 
-  inset:0;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
 
   width:100%;
-
   height:100%;
 
   background:#0a0a0a;
-
-  visibility:visible;
-
-  opacity:1;
 
   z-index:999999;
 
@@ -269,19 +265,20 @@ body{
 
 
 /* =========================================================
-   IFRAME KOMMO
+   IFRAME
    ========================================================= */
 
 #kommoChatFrame iframe{
 
   position:absolute;
 
-  inset:0;
+  top:0;
+  left:0;
 
   width:100% !important;
-
   height:100% !important;
 
+  min-width:100% !important;
   min-height:100% !important;
 
   border:0 !important;
@@ -299,7 +296,7 @@ body{
 
 
 <!-- =========================================================
-     CHATWEB
+     KOMMO CHAT
      ========================================================= -->
 
 <div id="kommoChatFrame"></div>
@@ -308,7 +305,8 @@ body{
 <script>
 
 /* =========================================================
-   ABRIR KOMMO INMEDIATAMENTE
+   SOFI DE LA SUERTE
+   APERTURA AUTOMATICA
    ========================================================= */
 
 (function(){
@@ -316,54 +314,38 @@ body{
   'use strict';
 
 
-  let attempts = 0;
-
-  const maxAttempts = 100;
+  let opened = false;
 
 
-  function openChat(){
-
-    attempts++;
-
+  function openKommo(){
 
     if(
-      typeof window.crmPlugin === 'function'
+      opened ||
+      typeof window.crmPlugin !== 'function'
     ){
 
-      try{
-
-        window.crmPlugin(
-          'runChatShow'
-        );
-
-        console.log(
-          '✅ Sofi de la Suerte - Chat Kommo abierto'
-        );
-
-        return;
-
-      }catch(error){
-
-        console.error(
-          'Error abriendo Kommo:',
-          error
-        );
-
-      }
+      return;
 
     }
 
 
-    /*
-     * Si Kommo todavía no terminó de cargar,
-     * volvemos a intentar rápidamente.
-     */
+    try{
 
-    if(attempts < maxAttempts){
+      window.crmPlugin(
+        'runChatShow'
+      );
 
-      setTimeout(
-        openChat,
-        10
+      opened = true;
+
+
+      console.log(
+        '✅ Sofi de la Suerte - Chat abierto'
+      );
+
+    }catch(error){
+
+      console.log(
+        '⏳ Kommo todavía está iniciando...'
       );
 
     }
@@ -372,11 +354,64 @@ body{
 
 
   /*
-   * Ejecutar inmediatamente
+   * Intento inmediato
    */
 
-  openChat();
+  openKommo();
 
+
+  /*
+   * Cuando Kommo informa que el ChatWeb
+   * está completamente preparado,
+   * lo abrimos automáticamente.
+   */
+
+  if(
+    typeof window.crmPlugin === 'function'
+  ){
+
+    window.crmPlugin(
+      'onChatReady',
+      function(){
+
+        openKommo();
+
+      }
+    );
+
+  }
+
+
+  /*
+   * Respaldo: comprobación rápida durante
+   * los primeros segundos.
+   */
+
+  let checks = 0;
+
+  const interval = setInterval(
+
+    function(){
+
+      checks++;
+
+      openKommo();
+
+
+      if(
+        opened ||
+        checks >= 300
+      ){
+
+        clearInterval(interval);
+
+      }
+
+    },
+
+    10
+
+  );
 
 })();
 
