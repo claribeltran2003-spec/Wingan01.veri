@@ -14,12 +14,12 @@
   content="#0a0a0a"
 >
 
-<title>BETAR</title>
+<title>Sofi de la Suerte</title>
 
 
 <!-- =========================================================
      KOMMO
-     CHATWEB BETAR
+     CHATWEB SOFI DE LA SUERTE
      ID: 1079233
      ========================================================= -->
 
@@ -110,8 +110,6 @@ window.crmPluginConfig = {
 <!-- =========================================================
      META PIXEL
      SOLO PAGEVIEW
-     NO CONTACT
-     NO EVENTOS ADICIONALES
      ========================================================= -->
 
 <script>
@@ -119,7 +117,6 @@ window.crmPluginConfig = {
 (function(){
 
   'use strict';
-
 
   !function(f,b,e,v,n,t,s){
 
@@ -169,40 +166,15 @@ window.crmPluginConfig = {
   );
 
 
-  /*
-   * PIXEL BETAR
-   */
-
   fbq(
     'init',
     '1417955607060434'
   );
 
 
-  /*
-   * PAGEVIEW
-   */
-
   fbq(
     'track',
     'PageView'
-  );
-
-
-  console.log(
-    '========================================'
-  );
-
-  console.log(
-    '✅ BETAR PIXEL INICIALIZADO'
-  );
-
-  console.log(
-    '✅ BETAR PAGEVIEW ENVIADO'
-  );
-
-  console.log(
-    '========================================'
   );
 
 })();
@@ -268,13 +240,11 @@ body{
     Arial,
     sans-serif;
 
-  color:#fff;
-
 }
 
 
 /* =========================================================
-   CONTENEDOR CHAT
+   CHAT KOMMO
    ========================================================= */
 
 #kommoChatFrame{
@@ -289,28 +259,11 @@ body{
 
   background:#0a0a0a;
 
-  visibility:hidden;
-
-  opacity:0;
-
-  transition:
-    opacity 0.1s ease,
-    visibility 0.1s ease;
-
-  z-index:9999;
-
-}
-
-
-/* =========================================================
-   CHAT ABIERTO
-   ========================================================= */
-
-#kommoChatFrame.is-open{
-
   visibility:visible;
 
   opacity:1;
+
+  z-index:999999;
 
 }
 
@@ -321,78 +274,19 @@ body{
 
 #kommoChatFrame iframe{
 
+  position:absolute;
+
+  inset:0;
+
   width:100% !important;
 
   height:100% !important;
 
+  min-height:100% !important;
+
   border:0 !important;
 
-}
-
-
-/* =========================================================
-   CARGANDO
-   ========================================================= */
-
-#loading{
-
-  position:fixed;
-
-  inset:0;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  flex-direction:column;
-
-  gap:14px;
-
-  background:#0a0a0a;
-
-  color:#fff;
-
-  font-size:15px;
-
-  font-weight:600;
-
-  z-index:9998;
-
-}
-
-
-/* =========================================================
-   SPINNER
-   ========================================================= */
-
-.spinner{
-
-  width:28px;
-
-  height:28px;
-
-  border:3px solid
-    rgba(255,255,255,0.15);
-
-  border-top-color:#25D366;
-
-  border-radius:50%;
-
-  animation:
-    spin 0.8s linear infinite;
-
-}
-
-
-@keyframes spin{
-
-  to{
-
-    transform:rotate(360deg);
-
-  }
+  display:block !important;
 
 }
 
@@ -405,21 +299,6 @@ body{
 
 
 <!-- =========================================================
-     CARGANDO CHAT
-     ========================================================= -->
-
-<div id="loading">
-
-  <div class="spinner"></div>
-
-  <div>
-    Cargando chat...
-  </div>
-
-</div>
-
-
-<!-- =========================================================
      CHATWEB
      ========================================================= -->
 
@@ -429,138 +308,77 @@ body{
 <script>
 
 /* =========================================================
-   ELEMENTOS
+   ABRIR KOMMO INMEDIATAMENTE
    ========================================================= */
 
-const frame =
-  document.getElementById(
-    'kommoChatFrame'
-  );
+(function(){
+
+  'use strict';
 
 
-const loading =
-  document.getElementById(
-    'loading'
-  );
+  let attempts = 0;
+
+  const maxAttempts = 100;
 
 
-let ready = false;
+  function openChat(){
+
+    attempts++;
 
 
-/* =========================================================
-   ABRIR CHAT REAL
-   ========================================================= */
+    if(
+      typeof window.crmPlugin === 'function'
+    ){
 
-function openReal(){
+      try{
 
-  /*
-   * Mostrar ChatWeb
-   */
+        window.crmPlugin(
+          'runChatShow'
+        );
 
-  frame.classList.add(
-    'is-open'
-  );
+        console.log(
+          '✅ Sofi de la Suerte - Chat Kommo abierto'
+        );
 
+        return;
 
-  /*
-   * Ocultar pantalla de carga
-   */
+      }catch(error){
 
-  loading.style.display =
-    'none';
+        console.error(
+          'Error abriendo Kommo:',
+          error
+        );
 
-
-  /*
-   * Abrir Kommo
-   */
-
-  try{
-
-    crmPlugin(
-      'runChatShow'
-    );
-
-
-    console.log(
-      '========================================'
-    );
-
-    console.log(
-      '✅ CHATWEB BETAR ABIERTO AUTOMÁTICAMENTE'
-    );
-
-    console.log(
-      '========================================'
-    );
-
-
-  }catch(error){
-
-    console.error(
-      '❌ ERROR ABRIENDO CHATWEB BETAR:',
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   ESPERAR CHATWEB KOMMO
-   ========================================================= */
-
-function bind(){
-
-  if(
-    typeof crmPlugin !==
-    'function'
-  ){
-
-    setTimeout(
-      bind,
-      100
-    );
-
-    return;
-
-  }
-
-
-  console.log(
-    '⏳ ESPERANDO CHATWEB BETAR...'
-  );
-
-
-  crmPlugin(
-    'onChatReady',
-    function(){
-
-      ready = true;
-
-
-      console.log(
-        '✅ CHATWEB BETAR LISTO'
-      );
-
-
-      /*
-       * ABRIR AUTOMÁTICAMENTE
-       */
-
-      openReal();
+      }
 
     }
-  );
-
-}
 
 
-/* =========================================================
-   INICIAR
-   ========================================================= */
+    /*
+     * Si Kommo todavía no terminó de cargar,
+     * volvemos a intentar rápidamente.
+     */
 
-bind();
+    if(attempts < maxAttempts){
+
+      setTimeout(
+        openChat,
+        10
+      );
+
+    }
+
+  }
+
+
+  /*
+   * Ejecutar inmediatamente
+   */
+
+  openChat();
+
+
+})();
 
 </script>
 
