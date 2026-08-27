@@ -18,7 +18,9 @@
 
 
 <!-- =========================================================
-     KOMMO CONFIG
+     KOMMO
+     CHATWEB SOFI DE LA SUERTE
+     ID: 1079233
      ========================================================= -->
 
 <script>
@@ -116,6 +118,7 @@ window.crmPluginConfig = {
 
   'use strict';
 
+
   !function(f,b,e,v,n,t,s){
 
     if(f.fbq)return;
@@ -181,7 +184,7 @@ window.crmPluginConfig = {
 
 
 <!-- =========================================================
-     NOSCRIPT
+     NOSCRIPT PAGEVIEW
      ========================================================= -->
 
 <noscript>
@@ -206,7 +209,9 @@ window.crmPluginConfig = {
 *{
 
   margin:0;
+
   padding:0;
+
   box-sizing:border-box;
 
 }
@@ -220,10 +225,8 @@ html,
 body{
 
   width:100%;
-  height:100%;
 
-  margin:0;
-  padding:0;
+  height:100%;
 
   overflow:hidden;
 
@@ -238,47 +241,61 @@ body{
     Arial,
     sans-serif;
 
+  color:#fff;
+
 }
 
 
 /* =========================================================
-   KOMMO FRAME
+   KOMMO CHAT FRAME
    ========================================================= */
 
 #kommoChatFrame{
 
   position:fixed;
 
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
+  inset:0;
 
   width:100%;
+
   height:100%;
 
   background:#0a0a0a;
 
-  z-index:999999;
+  visibility:hidden;
+
+  opacity:0;
+
+  z-index:9999;
+
+  transition:none;
 
 }
 
 
 /* =========================================================
-   IFRAME
+   CHAT ABIERTO
+   ========================================================= */
+
+#kommoChatFrame.is-open{
+
+  visibility:visible;
+
+  opacity:1;
+
+}
+
+
+/* =========================================================
+   IFRAME KOMMO
    ========================================================= */
 
 #kommoChatFrame iframe{
 
-  position:absolute;
-
-  top:0;
-  left:0;
-
   width:100% !important;
+
   height:100% !important;
 
-  min-width:100% !important;
   min-height:100% !important;
 
   border:0 !important;
@@ -296,7 +313,7 @@ body{
 
 
 <!-- =========================================================
-     KOMMO CHAT
+     CONTENEDOR KOMMO
      ========================================================= -->
 
 <div id="kommoChatFrame"></div>
@@ -305,115 +322,129 @@ body{
 <script>
 
 /* =========================================================
-   SOFI DE LA SUERTE
-   APERTURA AUTOMATICA
+   ELEMENTO
    ========================================================= */
 
-(function(){
-
-  'use strict';
-
-
-  let opened = false;
+const frame =
+  document.getElementById(
+    'kommoChatFrame'
+  );
 
 
-  function openKommo(){
+/* =========================================================
+   EVITAR DOBLE APERTURA
+   ========================================================= */
 
-    if(
-      opened ||
-      typeof window.crmPlugin !== 'function'
-    ){
-
-      return;
-
-    }
+let chatOpened = false;
 
 
-    try{
+/* =========================================================
+   ABRIR CHAT
+   ========================================================= */
 
-      window.crmPlugin(
-        'runChatShow'
-      );
+function openChat(){
 
-      opened = true;
+  if(chatOpened){
 
-
-      console.log(
-        '✅ Sofi de la Suerte - Chat abierto'
-      );
-
-    }catch(error){
-
-      console.log(
-        '⏳ Kommo todavía está iniciando...'
-      );
-
-    }
+    return;
 
   }
 
 
-  /*
-   * Intento inmediato
-   */
-
-  openKommo();
+  chatOpened = true;
 
 
   /*
-   * Cuando Kommo informa que el ChatWeb
-   * está completamente preparado,
-   * lo abrimos automáticamente.
+   * Primero mostramos el contenedor.
+   * Esto permite que Kommo pueda renderizar
+   * correctamente el iframe.
    */
 
-  if(
-    typeof window.crmPlugin === 'function'
-  ){
+  frame.classList.add(
+    'is-open'
+  );
 
-    window.crmPlugin(
-      'onChatReady',
-      function(){
 
-        openKommo();
+  /*
+   * Inmediatamente después
+   * ejecutamos la apertura de Kommo.
+   */
 
-      }
+  try{
+
+    crmPlugin(
+      'runChatShow'
+    );
+
+    console.log(
+      '✅ SOFI DE LA SUERTE - CHAT ABIERTO'
+    );
+
+  }catch(error){
+
+    chatOpened = false;
+
+    console.error(
+      '❌ ERROR KOMMO:',
+      error
     );
 
   }
 
+}
+
+
+/* =========================================================
+   ESPERAR ÚNICAMENTE A KOMMO
+   ========================================================= */
+
+function initChat(){
+
+  if(
+    typeof crmPlugin !==
+    'function'
+  ){
+
+    requestAnimationFrame(
+      initChat
+    );
+
+    return;
+
+  }
+
 
   /*
-   * Respaldo: comprobación rápida durante
-   * los primeros segundos.
+   * Nos enganchamos al evento real
+   * de Kommo.
    */
 
-  let checks = 0;
-
-  const interval = setInterval(
-
+  crmPlugin(
+    'onChatReady',
     function(){
 
-      checks++;
+      console.log(
+        '✅ KOMMO CHAT READY'
+      );
 
-      openKommo();
 
+      /*
+       * Abrir inmediatamente.
+       */
 
-      if(
-        opened ||
-        checks >= 300
-      ){
+      openChat();
 
-        clearInterval(interval);
-
-      }
-
-    },
-
-    10
-
+    }
   );
 
-})();
+}
+
+
+/* =========================================================
+   INICIO
+   ========================================================= */
+
+initChat();
 
 </script>
 
