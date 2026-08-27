@@ -108,6 +108,7 @@ window.crmPluginConfig = {
 
 <!-- =========================================================
      META PIXEL
+     SOLO PAGEVIEW
      ========================================================= -->
 
 <script>
@@ -115,6 +116,7 @@ window.crmPluginConfig = {
 (function(){
 
   'use strict';
+
 
   !function(f,b,e,v,n,t,s){
 
@@ -131,8 +133,10 @@ window.crmPluginConfig = {
 
     };
 
+
     if(!f._fbq)
       f._fbq=n;
+
 
     n.push=n;
 
@@ -142,11 +146,13 @@ window.crmPluginConfig = {
 
     n.queue=[];
 
+
     t=b.createElement(e);
 
     t.async=true;
 
     t.src=v;
+
 
     s=b.getElementsByTagName(e)[0];
 
@@ -177,7 +183,7 @@ window.crmPluginConfig = {
 
 
 <!-- =========================================================
-     NOSCRIPT
+     NOSCRIPT PAGEVIEW
      ========================================================= -->
 
 <noscript>
@@ -202,20 +208,23 @@ window.crmPluginConfig = {
 *{
 
   margin:0;
+
   padding:0;
+
   box-sizing:border-box;
 
 }
 
 
 /* =========================================================
-   BODY
+   HTML / BODY
    ========================================================= */
 
 html,
 body{
 
   width:100%;
+
   height:100%;
 
   overflow:hidden;
@@ -237,7 +246,7 @@ body{
 
 
 /* =========================================================
-   PANTALLA DE BIENVENIDA
+   BIENVENIDA
    ========================================================= */
 
 #welcome{
@@ -245,6 +254,10 @@ body{
   position:fixed;
 
   inset:0;
+
+  width:100%;
+
+  height:100%;
 
   display:flex;
 
@@ -261,15 +274,21 @@ body{
   background:
 
     radial-gradient(
-      circle at center,
-      rgba(212,175,55,0.12),
-      transparent 45%
+      circle at 50% 45%,
+      rgba(212,175,55,.14),
+      transparent 42%
+    ),
+
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(37,211,102,.06),
+      transparent 40%
     ),
 
     linear-gradient(
       135deg,
-      #080808 0%,
-      #10100d 50%,
+      #070707 0%,
+      #11100d 50%,
       #050505 100%
     );
 
@@ -279,9 +298,11 @@ body{
 
   visibility:visible;
 
+  pointer-events:auto;
+
   transition:
-    opacity .18s ease,
-    visibility .18s ease;
+    opacity .20s ease,
+    visibility .20s ease;
 
 }
 
@@ -302,7 +323,7 @@ body{
 
 
 /* =========================================================
-   ICONO
+   ICONO CASINO
    ========================================================= */
 
 .welcome-icon{
@@ -325,16 +346,19 @@ body{
 
   color:#d4af37;
 
-  font-size:32px;
+  font-size:30px;
+
+  font-weight:700;
 
   box-shadow:
-    0 0 25px rgba(212,175,55,.18);
+    0 0 25px rgba(212,175,55,.18),
+    inset 0 0 18px rgba(212,175,55,.05);
 
 }
 
 
 /* =========================================================
-   TEXTO SUPERIOR
+   TEXTO PEQUEÑO
    ========================================================= */
 
 .welcome-small{
@@ -343,9 +367,9 @@ body{
 
   color:#25D366;
 
-  font-size:12px;
+  font-size:11px;
 
-  font-weight:700;
+  font-weight:800;
 
   letter-spacing:3px;
 
@@ -371,7 +395,7 @@ body{
 
   text-transform:uppercase;
 
-  color:#fff;
+  color:#ffffff;
 
   text-shadow:
     0 2px 20px rgba(0,0,0,.6);
@@ -380,19 +404,19 @@ body{
 
 
 /* =========================================================
-   SOFI
+   SOFI DE LA SUERTE
    ========================================================= */
 
 .welcome-title span{
 
   display:block;
 
-  margin-top:5px;
+  margin-top:6px;
 
   color:#d4af37;
 
   text-shadow:
-    0 0 20px rgba(212,175,55,.20);
+    0 0 20px rgba(212,175,55,.25);
 
 }
 
@@ -405,7 +429,7 @@ body{
 
   margin-top:18px;
 
-  color:#a7a7a7;
+  color:#a9a9a9;
 
   font-size:14px;
 
@@ -415,16 +439,16 @@ body{
 
 
 /* =========================================================
-   LINEA DECORATIVA
+   LINEA DORADA
    ========================================================= */
 
 .welcome-line{
 
-  width:90px;
+  width:100px;
 
   height:2px;
 
-  margin-top:25px;
+  margin-top:24px;
 
   background:
     linear-gradient(
@@ -438,7 +462,7 @@ body{
 
 
 /* =========================================================
-   INDICADOR ONLINE
+   ONLINE
    ========================================================= */
 
 .online{
@@ -447,31 +471,62 @@ body{
 
   align-items:center;
 
-  gap:7px;
+  justify-content:center;
 
-  margin-top:20px;
+  gap:8px;
+
+  margin-top:18px;
 
   color:#25D366;
 
   font-size:12px;
 
-  font-weight:600;
+  font-weight:700;
 
 }
 
 
+/* =========================================================
+   PUNTO ONLINE
+   ========================================================= */
+
 .online-dot{
 
-  width:7px;
+  width:8px;
 
-  height:7px;
+  height:8px;
 
   border-radius:50%;
 
   background:#25D366;
 
   box-shadow:
-    0 0 10px rgba(37,211,102,.7);
+    0 0 10px rgba(37,211,102,.8);
+
+  animation:
+    onlinePulse 1.4s ease-in-out infinite;
+
+}
+
+
+@keyframes onlinePulse{
+
+  0%,
+  100%{
+
+    opacity:1;
+
+    transform:scale(1);
+
+  }
+
+  50%{
+
+    opacity:.45;
+
+    transform:scale(.75);
+
+  }
 
 }
 
@@ -498,11 +553,14 @@ body{
 
   z-index:999999;
 
+  transition:
+    opacity .20s ease;
+
 }
 
 
 /* =========================================================
-   CHAT ABIERTO
+   FRAME ABIERTO
    ========================================================= */
 
 #kommoChatFrame.is-open{
@@ -515,7 +573,7 @@ body{
 
 
 /* =========================================================
-   IFRAME
+   IFRAME KOMMO
    ========================================================= */
 
 #kommoChatFrame iframe{
@@ -527,6 +585,8 @@ body{
   width:100% !important;
 
   height:100% !important;
+
+  min-width:100% !important;
 
   min-height:100% !important;
 
@@ -545,7 +605,7 @@ body{
 
 
 <!-- =========================================================
-     BIENVENIDA
+     PANTALLA DE BIENVENIDA
      ========================================================= -->
 
 <div id="welcome">
@@ -586,7 +646,7 @@ body{
 
 
 <!-- =========================================================
-     KOMMO
+     CHAT KOMMO
      ========================================================= -->
 
 <div id="kommoChatFrame"></div>
@@ -610,63 +670,54 @@ const welcome =
   );
 
 
-let chatOpened = false;
+let chatRequested = false;
+
+let chatVisible = false;
 
 
 /* =========================================================
-   ABRIR CHAT
+   SOLICITAR APERTURA
    ========================================================= */
 
-function openChat(){
+function requestChat(){
 
-  if(chatOpened){
+  if(chatRequested){
 
     return;
 
   }
 
 
+  if(
+    typeof window.crmPlugin !==
+    'function'
+  ){
+
+    return;
+
+  }
+
+
+  chatRequested = true;
+
+
   try{
 
-    /*
-     * Primero mostramos el frame
-     */
-
-    frame.classList.add(
-      'is-open'
-    );
-
-
-    /*
-     * Abrimos Kommo
-     */
-
-    crmPlugin(
+    window.crmPlugin(
       'runChatShow'
     );
 
 
-    chatOpened = true;
-
-
-    /*
-     * Ocultar bienvenida
-     */
-
-    welcome.classList.add(
-      'hide'
-    );
-
-
     console.log(
-      '✅ SOFI DE LA SUERTE - CHAT ABIERTO'
+      '⏳ SOLICITANDO CHAT SOFI DE LA SUERTE...'
     );
-
 
   }catch(error){
 
+    chatRequested = false;
+
     console.error(
-      '❌ ERROR KOMMO:',
+      '❌ ERROR AL SOLICITAR KOMMO:',
       error
     );
 
@@ -676,42 +727,138 @@ function openChat(){
 
 
 /* =========================================================
-   ESPERAR A KOMMO
+   MOSTRAR CHAT CUANDO EL IFRAME EXISTE
    ========================================================= */
 
-function initChat(){
+function checkIframe(){
+
+  const iframe =
+    frame.querySelector(
+      'iframe'
+    );
+
 
   if(
-    typeof crmPlugin !==
+    iframe &&
+    iframe.contentWindow
+  ){
+
+    if(!chatVisible){
+
+      chatVisible = true;
+
+
+      frame.classList.add(
+        'is-open'
+      );
+
+
+      welcome.classList.add(
+        'hide'
+      );
+
+
+      console.log(
+        '✅ CHAT SOFI DE LA SUERTE VISIBLE'
+      );
+
+    }
+
+    return true;
+
+  }
+
+
+  return false;
+
+}
+
+
+/* =========================================================
+   ESPERAR KOMMO
+   ========================================================= */
+
+function waitForKommo(){
+
+  if(
+    typeof window.crmPlugin ===
     'function'
   ){
 
-    requestAnimationFrame(
-      initChat
+    /*
+     * Solicitar inmediatamente
+     */
+    requestChat();
+
+
+    /*
+     * Evento oficial de Kommo
+     */
+    window.crmPlugin(
+      'onChatReady',
+      function(){
+
+        console.log(
+          '✅ KOMMO CHAT READY'
+        );
+
+        requestChat();
+
+      }
     );
+
+
+    /*
+     * Vigilar aparición del iframe
+     */
+    const observer =
+      new MutationObserver(
+        function(){
+
+          checkIframe();
+
+        }
+      );
+
+
+    observer.observe(
+      frame,
+      {
+        childList:true,
+        subtree:true
+      }
+    );
+
+
+    /*
+     * Comprobación inicial
+     */
+    checkIframe();
+
 
     return;
 
   }
 
 
-  crmPlugin(
-    'onChatReady',
-    function(){
+  /*
+   * Kommo todavía está cargando.
+   * Esperamos al siguiente frame del navegador,
+   * sin una espera fija.
+   */
 
-      openChat();
-
-    }
+  requestAnimationFrame(
+    waitForKommo
   );
 
 }
 
 
 /* =========================================================
-   INICIO
+   INICIAR
    ========================================================= */
 
-initChat();
+waitForKommo();
 
 </script>
 
@@ -720,4 +867,4 @@ initChat();
 </html>
 ```
 
-La pantalla de bienvenida queda **por encima de todo**, así que ese segundo que tarda Kommo ya no se percibe como una pantalla negra. En cuanto Kommo dispara `onChatReady`, se abre el chat y desaparece la bienvenida.
+Con esta versión, la pantalla de **BIENVENIDO A SOFI DE LA SUERTE** queda visible mientras Kommo prepara el chat. En cuanto aparece el `iframe` real, se hace la transición directamente al chat, evitando que se vea el fondo negro entre ambos.
